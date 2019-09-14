@@ -1,0 +1,57 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName:  actions-
+  labels:
+    workflow: actions 
+spec:
+  entrypoint: actions 
+  templates:
+  - name: actions 
+    dag:
+      tasks:
+      - name: preprocess
+        template: preprocess
+
+      - name: model1
+        dependencies: [preprocess]
+        template: train
+        arguments:
+          artifacts:
+          - name: dataset
+            from: "{{tasks.preprocess.outputs.artifacts.dataset}}"
+
+  - name: preprocess
+    container:
+      image: hamelsmu/ml-cicd
+      name: preprocess
+      command: ["python", "/src/preprocess.py"]
+      env:
+        - name: DASK_SCHEDULER_ADDRESS
+          valueFrom:
+            secretKeyRef:
+              name: ml-cicd
+              key: DASK_SCHEDULER_ADDRESS
+    outputs:
+     artifacts:
+     - name: dataset
+       path: /data
+
+  - name: train
+    inputs:
+      artifacts:
+      - name: dataset
+        path: /data
+    outputs:
+     artifacts:
+     - name: model
+       path: /output
+    container:
+      image: hamelsmu/ml-cicd-gpu
+      name: trainer
+      resources:
+        requests:
+          nvidia.com/gpu: 1 # requesting 1 GPU
+        limits:
+          nvidia.com/gpu: 1
+      command: ["python", "/src/train.py"]

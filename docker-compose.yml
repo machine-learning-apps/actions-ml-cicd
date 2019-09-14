@@ -1,0 +1,12 @@
+version: '3'
+services:
+  ml:
+    network_mode: "host"
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    volumes:
+      - ${PWD}:/data
+    environment:
+      - DASK_SCHEDULER
+    command: sleep 10000000000
