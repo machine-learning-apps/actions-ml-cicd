@@ -1,8 +1,8 @@
 version: '3'
 services:
   ml:
-    container_name: actions-ml-cicd_ml_1
-    image: hamelsmu/ml-ci-cd
+    container_name: actions-ml-cicd_cpu_1
+    image: hamelsmu/ml-cicd
     network_mode: "host"
     build:
       context: .
@@ -11,4 +11,4 @@ services:
       - .:/data
     environment:
       - DASK_SCHEDULER
-    command: tail -f /dev/null 
+    command: tail -f /dev/null

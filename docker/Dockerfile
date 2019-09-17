@@ -25,6 +25,8 @@ RUN mkdir /output
 ENV PYTHONUNBUFFERED=0
 COPY src /src
 WORKDIR data
+# Scaffolding incase you want to ssh into container
 RUN mkdir .ssh
 RUN touch .ssh/authorized_keys
+
 CMD scripts/run_jupyter.sh
