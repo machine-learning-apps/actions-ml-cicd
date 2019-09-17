@@ -113,20 +113,20 @@ now = time.time() - start_time
 print(f"counting words body {now}")
 
 words_to_keep_body = body_counts.most_common(n=8000)
-body_vocab = defaultdict(lambda: 1)
-body_vocab.update({x:i+2 for i, x in enumerate([x[0] for x in words_to_keep_body])})
+body_vocab_map = defaultdict(lambda: 1)
+body_vocab_map.update({x:i+2 for i, x in enumerate([x[0] for x in words_to_keep_body])})
 
 now = time.time() - start_time
 print(f"counting words title {now}")
 words_to_keep_title = title_counts.most_common(n=4500)
-titles_vocab = defaultdict(lambda: 1)
-titles_vocab.update({x:i+2 for i, x in enumerate([x[0] for x in words_to_keep_title])})
+titles_vocab_map = defaultdict(lambda: 1)
+titles_vocab_map.update({x:i+2 for i, x in enumerate([x[0] for x in words_to_keep_title])})
 
 now = time.time() - start_time
 print(f"words counted {now}")
 
-numer_bodies = bodies_parsed.apply(lambda x: [body_vocab[w] for w in x])
-numer_titles = titles_parsed.apply(lambda x: [titles_vocab[w] for w in x])
+numer_bodies = bodies_parsed.apply(lambda x: [body_vocab_map[w] for w in x])
+numer_titles = titles_parsed.apply(lambda x: [titles_vocab_map[w] for w in x])
 
 def pad_partition(numerized_doc, max_len):
     if type(numerized_doc) != list:
@@ -154,8 +154,8 @@ f.close()
 
 with open("/data/metadata.json", "w") as f:
     meta = {
-        'body_vocab_size': len(body_vocab),
-        'title_vocab_size': len(titles_vocab),
+        'body_vocab_map_size': len(body_vocab_map)+2,
+        'title_vocab_size': len(titles_vocab_map)+2,
         'issue_body_doc_length': body_quant,
         'issue_title_doc_length': title_quant,
     }
