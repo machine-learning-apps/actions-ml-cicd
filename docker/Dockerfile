@@ -25,4 +25,6 @@ RUN mkdir /output
 ENV PYTHONUNBUFFERED=0
 COPY src /src
 WORKDIR data
-CMD run_jupyter.sh
+RUN mkdir .ssh
+RUN touch .ssh/authorized_keys
+CMD scripts/run_jupyter.sh
