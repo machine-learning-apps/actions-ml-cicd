@@ -3,7 +3,7 @@
 set -e
 cd $(dirname "$0")/..
 
-docker-compose -f docker-compose-cpu.yml up --build  -d
+docker-compose -f docker-compose.cpu.yml up --build  -d
 docker push hamelsmu/ml-cicd
 docker exec -it actions-ml-cicd_cpu_1 bash
 
