@@ -8,10 +8,11 @@ RUN pip install ktext \
      dill \
      ktext \ 
      tensorflow \
+     tqdm \
      distributed \
      dask-ml \
      ipython \
-     jupyterlab
+     jupyterlab 
 
 RUN apt-get update && apt-get install htop -y
 RUN apt-get install openssh-server -y
