@@ -36,8 +36,8 @@ num_classes = 3
 body_input = Input(shape=(meta['issue_body_doc_length'],), name='Body-Input')
 title_input = Input(shape=(meta['issue_title_doc_length'],), name='Title-Input')
 
-b_i = Embedding(meta['body_vocab_size']+1, body_emb_size, name='Body-Embedding', mask_zero=False)(body_input)
-b_t = Embedding(meta['title_vocab_size']+1, title_emb_size, name='Title-Embedding', mask_zero=False)(title_input)
+b_i = Embedding(meta['body_vocab_size']+2, body_emb_size, name='Body-Embedding', mask_zero=False)(body_input)
+b_t = Embedding(meta['title_vocab_size']+2, title_emb_size, name='Title-Embedding', mask_zero=False)(title_input)
 
 b_i = BatchNormalization()(b_i)
 b_i = Bidirectional(GRU(100, name='Body-Encoder'))(b_i)
