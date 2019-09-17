@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: docker/Dockerfile
     volumes:
-      - ${PWD}:/data
+      - .:/data
     environment:
       - DASK_SCHEDULER
-    command: sleep 10000000000
+    command: tail -f /dev/null 
