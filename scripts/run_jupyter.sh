@@ -1,2 +1,2 @@
 #!/bin/bash
-jupyter lab --ip 0.0.0.0 --no-browser --port 8888 --allow-root
+jupyter lab --ip 0.0.0.0 --no-browser --port 7654 --allow-root

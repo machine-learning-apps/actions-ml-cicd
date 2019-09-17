@@ -7,6 +7,8 @@ services:
     build:
       context: .
       dockerfile: docker/Dockerfile
+    ports:
+      - "7654:7654"
     volumes:
       - .:/data
     environment:

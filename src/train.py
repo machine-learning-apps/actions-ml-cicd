@@ -12,8 +12,6 @@ from tensorflow.keras.optimizers import Nadam
 from tensorflow.keras.callbacks import CSVLogger, ModelCheckpoint
 
 
-
-
 input_dir = "/data/"
 out_dir = "/output/"
 dataset = h5py.File('/data/dataset.hdf5', 'r')

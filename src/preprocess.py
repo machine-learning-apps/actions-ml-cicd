@@ -1,5 +1,14 @@
+import logging
+import warnings
+warnings.filterwarnings('ignore')
+logger = logging.getLogger("distributed.utils_perf")
+logger.setLevel(logging.ERROR)
+
+import tensorflow as tf
+tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
+
 import pandas as pd
-import dask.dataframe as df
+import dask.dataframe as daskdf
 from dask_ml.preprocessing import OneHotEncoder
 import numpy as np
 from keras.utils.np_utils import to_categorical
@@ -30,7 +39,23 @@ start_time = time.time()
 output_dir = "/data/"
 
 base_url = 'https://storage.googleapis.com/codenet/issue_labels/'
-dd = df.from_pandas(pd.concat([pd.read_csv(base_url+f'00000000000{i}.csv.gz') for i in range(1)]), npartitions=100)
+df = pd.concat([pd.read_csv(base_url+f'00000000000{i}.csv.gz') for i in range(1)])
+
+# Minimal EDA for logging purposes
+print(f'Shape of data: {df.shape}')
+print(f'Preview of first 3 rows\n: {df.head(3).T}')
+
+print('Most common label sets:')
+print(df.labels.value_counts(normalize=True).to_frame().head(20))
+
+print('Label distribution:')
+print(df.groupby(['c_bug', 'c_feature', 'c_question']).size().to_frame())
+
+print('Total count of labels:')
+print(df[['c_bug', 'c_feature', 'c_question']].sum())
+
+dd = daskdf.from_pandas(df, npartitions=100)
+del df
 
 def textacy_cleaner(text: str) -> str:
     """a
@@ -61,14 +86,16 @@ def process_document(doc: str) -> List[str]:
     return ["_start_"] + doc + ["_end_"]
 
 
-test_data = 'hello world 314-903-3072, hamel.husain@gmail.com wee woo'
+test_data = 'hello world 314-903-3072, somebody.somebody@gmail.com wee woo'
 assert process_document(test_data) == ['_start_', 'hello', 'world', 'phone', 'email', 'wee', 'woo', '_end_']
 
 
 bodies_parsed = dd["body"].apply(process_document)
 titles_parsed = dd["title"].apply(process_document)
 
-now = time.time() - start_time
+print('Preview of tokenized text (truncated) from issue bodies:')
+for body in bodies_parsed.sample(frac=.5).compute().head():
+    print(body[:1] +body[1:-1][:8]+ body[-1:], '\n')
 
 pbar.update(1)
 pbar.set_description(desc="Calculating max length (quantiles)", refresh=True)
@@ -80,7 +107,7 @@ targets = dd["class_int"].to_frame().map_partitions(to_one_hot).compute(schedule
 
 body_quant = int(bodies_parsed.apply(len).quantile(q=0.85).compute(scheduler='processes'))
 title_quant = int(titles_parsed.apply(len).quantile(q=0.85).compute(scheduler='processes'))
-print(f"Quantiles title-{title_quant} body-{body_quant} ")
+print(f"85th percentile lengths title: {title_quant} body: {body_quant} ")
 
 pbar.update(1)
 pbar.set_description(desc="Building vocabulary", refresh=True)
@@ -111,6 +138,7 @@ body_counts = sum(body_counts.tolist(), Counter())
 title_counts = titles_parsed.map_partitions(count_words).compute(scheduler='processes')
 title_counts = sum(title_counts.tolist(), Counter())
 
+print(f"25 most frequent words: {body_counts.most_common(n=25)}")
 words_to_keep_body = body_counts.most_common(n=8000)
 body_vocab_map = defaultdict(lambda: 1)
 body_vocab_map.update({x:i+2 for i, x in enumerate([x[0] for x in words_to_keep_body])})
@@ -154,6 +182,8 @@ with open("/data/metadata.json", "w") as f:
         'issue_title_doc_length': title_quant,
     }
     f.write(json.dumps(meta))
+
+print(f'Metadata:\n {meta}')
 
 pbar.update(1)
 pbar.close()
