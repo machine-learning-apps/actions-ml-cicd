@@ -1,6 +1,7 @@
 version: '3'
 services:
   ml:
+    image: hamelsmu/ml-cicd
     network_mode: "host"
     build:
       context: .
