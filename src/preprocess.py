@@ -154,7 +154,7 @@ f.close()
 
 with open("/data/metadata.json", "w") as f:
     meta = {
-        'body_vocab_map_size': len(body_vocab_map)+2,
+        'body_vocab_size': len(body_vocab_map)+2,
         'title_vocab_size': len(titles_vocab_map)+2,
         'issue_body_doc_length': body_quant,
         'issue_title_doc_length': title_quant,
