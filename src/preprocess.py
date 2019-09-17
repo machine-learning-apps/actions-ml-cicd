@@ -18,9 +18,12 @@ import dask.multiprocessing
 from collections import Counter
 from collections import defaultdict
 import h5py
+from tqdm import tqdm
 
 
 # client = Client(os.getenv("DASK_SCHEDULER_ADDRESS"))
+pbar = tqdm(total=6)
+pbar.set_description(desc="tokenizing", refresh=True)
 
 start_time = time.time()
 
@@ -66,7 +69,9 @@ bodies_parsed = dd["body"].apply(process_document)
 titles_parsed = dd["title"].apply(process_document)
 
 now = time.time() - start_time
-print(f"tokenized {now}")
+
+pbar.update(1)
+pbar.set_description(desc="Calculating max length (quantiles)", refresh=True)
 
 def to_one_hot(df):
     return to_categorical(df.values, num_classes=3)
@@ -75,8 +80,10 @@ targets = dd["class_int"].to_frame().map_partitions(to_one_hot).compute(schedule
 
 body_quant = int(bodies_parsed.apply(len).quantile(q=0.85).compute(scheduler='processes'))
 title_quant = int(titles_parsed.apply(len).quantile(q=0.85).compute(scheduler='processes'))
-
 print(f"Quantiles title-{title_quant} body-{body_quant} ")
+
+pbar.update(1)
+pbar.set_description(desc="Building vocabulary", refresh=True)
 
 def drop_long_docs(doc, max_len):
     if len(doc) > max_len:
@@ -97,33 +104,23 @@ def count_words(partition):
 
 
 now = time.time() - start_time
-print(f"quantiles done {now}")
 
 
 body_counts = bodies_parsed.map_partitions(count_words).compute(scheduler='processes')
-now = time.time() - start_time
-print(f"body counts computed {now}")
 body_counts = sum(body_counts.tolist(), Counter())
-now = time.time() - start_time
-print(f"body-counts done {now}")
 title_counts = titles_parsed.map_partitions(count_words).compute(scheduler='processes')
 title_counts = sum(title_counts.tolist(), Counter())
-
-now = time.time() - start_time
-print(f"counting words body {now}")
 
 words_to_keep_body = body_counts.most_common(n=8000)
 body_vocab_map = defaultdict(lambda: 1)
 body_vocab_map.update({x:i+2 for i, x in enumerate([x[0] for x in words_to_keep_body])})
 
-now = time.time() - start_time
-print(f"counting words title {now}")
 words_to_keep_title = title_counts.most_common(n=4500)
 titles_vocab_map = defaultdict(lambda: 1)
 titles_vocab_map.update({x:i+2 for i, x in enumerate([x[0] for x in words_to_keep_title])})
 
-now = time.time() - start_time
-print(f"words counted {now}")
+pbar.update(1)
+pbar.set_description(desc="Applying vocabulary and padding", refresh=True)
 
 numer_bodies = bodies_parsed.apply(lambda x: [body_vocab_map[w] for w in x])
 numer_titles = titles_parsed.apply(lambda x: [titles_vocab_map[w] for w in x])
@@ -136,15 +133,12 @@ def pad_partition(numerized_doc, max_len):
 processed_bodies = numer_bodies.apply(pad_partition, max_len=body_quant)
 processed_titles = numer_titles.apply(pad_partition, max_len=title_quant)
 
-now = time.time() - start_time
-print(f"saving {now}")
-
 processed_titles = np.stack(processed_titles.values.compute(scheduler='processes'))
 processed_bodies = np.stack(processed_bodies.values.compute(scheduler='processes'))
 
-now = time.time() - start_time
-print(f"creating hdf5 {now}")
 
+pbar.update(1)
+pbar.set_description(desc="Saving models and artifacts", refresh=True)
 
 f = h5py.File('/data/dataset.hdf5', 'w')
 f.create_dataset('/titles', data=processed_titles)
@@ -161,6 +155,5 @@ with open("/data/metadata.json", "w") as f:
     }
     f.write(json.dumps(meta))
 
-
-now = time.time() - start_time
-print(f"saved {now}")
+pbar.update(1)
+pbar.close()
