@@ -1,7 +1,8 @@
 version: '3'
 services:
   ml:
-    container_name: hamelsmu/ml-cicd
+    container_name: actions-ml-cicd_ml_1
+    image: hamelsmu/ml-ci-cd
     network_mode: "host"
     build:
       context: .
