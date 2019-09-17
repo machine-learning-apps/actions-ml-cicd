@@ -3,7 +3,6 @@
 set -e
 cd $(dirname "$0")/..
 
-docker-compose -f docker-compose.gpu.yml up --build -d
+docker build -t hamelsmu/ml-cicd-gpu -f docker/gpu.Dockerfile .
 docker push hamelsmu/ml-cicd-gpu
-docker exec -it actions-ml-cicd_gpu_1 bash
-#docker run -e DASK_SCHEDULER=$DASK_SCHEDULER -it -p 8888:8888 -v $PWD:/data hamelsmu/ml-cicd bash
+docker run -e DASK_SCHEDULER=$DASK_SCHEDULER --runtime=nvidia -it -p 8888:8888 -v $PWD:/data hamelsmu/ml-cicd bash
