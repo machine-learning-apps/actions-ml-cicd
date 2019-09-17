@@ -7,6 +7,7 @@ logger.setLevel(logging.ERROR)
 import tensorflow as tf
 tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
 
+from datetime import datetime
 import pandas as pd
 import dask.dataframe as daskdf
 from dask_ml.preprocessing import OneHotEncoder
@@ -29,6 +30,8 @@ from collections import defaultdict
 import h5py
 from tqdm import tqdm
 
+def format_time(val):
+    return datetime.fromtimestamp(val).strftime('%H:%M:%S')
 
 # client = Client(os.getenv("DASK_SCHEDULER_ADDRESS"))
 pbar = tqdm(total=6)
@@ -39,7 +42,7 @@ start_time = time.time()
 output_dir = "/data/"
 
 base_url = 'https://storage.googleapis.com/codenet/issue_labels/'
-df = pd.concat([pd.read_csv(base_url+f'00000000000{i}.csv.gz') for i in range(1)])
+df = pd.concat([pd.read_csv(base_url+f'00000000000{i}.csv.gz') for i in range(1)]).head(100)
 
 # Minimal EDA for logging purposes
 print(f'Shape of data: {df.shape}')
@@ -98,6 +101,7 @@ for body in bodies_parsed.sample(frac=.5).compute().head():
     print(body[:1] +body[1:-1][:8]+ body[-1:], '\n')
 
 pbar.update(1)
+print(f'\nAmount of time (minutes) to parse text: {format_time(time.time() - start_time)}')
 pbar.set_description(desc="Calculating max length (quantiles)", refresh=True)
 
 def to_one_hot(df):
@@ -130,9 +134,6 @@ def count_words(partition):
     return ct
 
 
-now = time.time() - start_time
-
-
 body_counts = bodies_parsed.map_partitions(count_words).compute(scheduler='processes')
 body_counts = sum(body_counts.tolist(), Counter())
 title_counts = titles_parsed.map_partitions(count_words).compute(scheduler='processes')
@@ -148,6 +149,7 @@ titles_vocab_map = defaultdict(lambda: 1)
 titles_vocab_map.update({x:i+2 for i, x in enumerate([x[0] for x in words_to_keep_title])})
 
 pbar.update(1)
+print(f'\nAmount of time (minutes) to build vocabulary: {format_time(time.time() - start_time)}')
 pbar.set_description(desc="Applying vocabulary and padding", refresh=True)
 
 numer_bodies = bodies_parsed.apply(lambda x: [body_vocab_map[w] for w in x])
@@ -166,6 +168,7 @@ processed_bodies = np.stack(processed_bodies.values.compute(scheduler='processes
 
 
 pbar.update(1)
+print(f'\nAmount of time (minutes) to apply vocabulary: {format_time(time.time() - start_time)}')
 pbar.set_description(desc="Saving models and artifacts", refresh=True)
 
 f = h5py.File('/data/dataset.hdf5', 'w')
