@@ -2,6 +2,7 @@ import numpy as np
 import dill as dpickle
 import h5py
 import json
+import os
 from sklearn.model_selection import train_test_split
 
 import tensorflow as tf
@@ -10,6 +11,9 @@ from tensorflow.keras.models import Model
 from tensorflow.keras.layers import Input, GRU, Dense, Embedding, Conv1D, Bidirectional, BatchNormalization, Dot, Flatten, Concatenate
 from tensorflow.keras.optimizers import Nadam
 from tensorflow.keras.callbacks import CSVLogger, ModelCheckpoint
+import wandb
+from wandb.keras import WandbCallback
+wandb.init(project="labeling-github-issues")
 
 
 input_dir = "/data/"
@@ -62,4 +66,7 @@ history = parallel_model.fit(x=[train_bodies, train_titles],
                              batch_size=batch_size,
                              epochs=epochs,
                              validation_split=0.10, 
-                             callbacks=[csv_logger, model_checkpoint])
+                             callbacks=[csv_logger, model_checkpoint, WandbCallback()])
+
+# save everything in the out_dir
+wandb.save(os.path.join(out_dir, '*'))

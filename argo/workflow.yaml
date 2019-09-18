@@ -42,10 +42,6 @@ spec:
       artifacts:
       - name: dataset
         path: /data
-    outputs:
-     artifacts:
-     - name: model
-       path: /output
     container:
       image: hamelsmu/ml-cicd-gpu
       name: trainer
@@ -55,3 +51,18 @@ spec:
         limits:
           nvidia.com/gpu: 1
       command: ["python", "/src/train.py"]
+      env:
+      - name: WANDB_API_KEY
+        valueFrom:
+          secretKeyRef:
+            name: ml-cicd
+            key: WANDB_API_KEY
+      - name: WANDB_USERNAME
+        valueFrom:
+          secretKeyRef:
+            name: ml-cicd
+            key: WANDB_USERNAME
+    outputs:
+     artifacts:
+     - name: model
+       path: /output

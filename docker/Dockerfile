@@ -12,7 +12,8 @@ RUN pip install ktext \
      distributed \
      dask-ml \
      ipython \
-     jupyterlab 
+     jupyterlab \
+     wandb
 
 RUN apt-get update && apt-get install htop -y
 RUN apt-get install openssh-server -y
