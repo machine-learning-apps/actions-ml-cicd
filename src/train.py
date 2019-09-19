@@ -13,7 +13,7 @@ from tensorflow.keras.optimizers import Nadam
 from tensorflow.keras.callbacks import CSVLogger, ModelCheckpoint
 import wandb
 from wandb.keras import WandbCallback
-wandb.init(project="labeling-github-issues")
+wandb.init(project="predict-issue-labels")
 
 
 input_dir = "/data/"
