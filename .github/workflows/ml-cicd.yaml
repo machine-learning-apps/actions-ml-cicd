@@ -1,0 +1,16 @@
+name: ML Workflow Via Actions
+on:
+  issue_comment
+
+jobs:
+  ml:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Validate Comment
+      run: |
+        ISSUE_NUMBER=$(jq --raw-output .number "$GITHUB_EVENT_PATH")
+        echo $ISSUE_NUMBER
+        
+        
+        
