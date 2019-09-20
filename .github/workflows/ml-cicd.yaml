@@ -1,16 +1,21 @@
 name: ML Workflow Via Actions
 on:
-  [gollum]
+  pull_request:
+    types:
+      - labeled
 
 jobs:
-  ml:
+  validate_run:
     runs-on: ubuntu-latest
     steps:
 
-    - name: Validate Comment
-      run: |
-        ISSUE_NUMBER=$(jq --raw-output .number "$GITHUB_EVENT_PATH")
-        echo $ISSUE_NUMBER
-        
+    - name: Copy Repo Files
+      uses: actions/checkout@master
+      
+    - name: Validate Payload
+      id: validate
+      run: python gke-argo-action/validate_payload.py
+      env:
+        TRIGGER_LABEL_NAME: 'run/model-ci' 
         
         
