@@ -8,13 +8,14 @@ Read [this article](https://blog.paperspace.com/ci-cd-for-machine-learning-ai/) 
   - [On GKE](https://github.com/marketplace/actions/submit-argo-workflows-to-gke)
   - [Cloud agnostic version](https://github.com/marketplace/actions/submit-argo-workflows-from-github)
 
+- **Query Experiment Tracking Results**
+  - From Weights & Biases
+
 - **Publish Docker Images**
   - [To the GitHub Package Registry](https://github.com/marketplace/actions/publish-docker-images-to-gpr)
   - [To a generic registry](https://github.com/marketplace/actions/publish-docker)
 
-- **Query Experiment Tracking Results**
-  - From Weights & Biases
-  
+
 ### Demonstrations of ML CI/CD
 
 TODO
