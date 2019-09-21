@@ -5,8 +5,8 @@ Read [this article](https://blog.paperspace.com/ci-cd-for-machine-learning-ai/) 
 ## GitHub Actions That Enable CI/CD For Machine Learning
 
 - **Submitting [Argo workflows](https://argoproj.github.io/)** - kick off machine learning pipelines that run on Kubernetes from GitHub:
-  - [On GKE](https://github.com/marketplace/actions/submit-argo-workflows-to-gke)
-  - [Cloud agnostic version](https://github.com/marketplace/actions/submit-argo-workflows-from-github)
+  - [On GKE](https://github.com/marketplace/actions/submit-argo-workflows-to-gke) - leverages the gcloud cli to authenticate to your GKE cluster and submit argo workflows.
+  - [Cloud agnostic version](https://github.com/marketplace/actions/submit-argo-workflows-from-github) - assumes you can obtain a kubeconfig file to authenticate to your k8 cluster.
 
 - **Query Experiment Tracking Results**
   - From Weights & Biases
