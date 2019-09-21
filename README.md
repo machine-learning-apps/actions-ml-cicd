@@ -2,12 +2,19 @@
 
 Read [this article](https://blog.paperspace.com/ci-cd-for-machine-learning-ai/) for a primer on what CI/CD for Machine Learning is and where it differs from traditional CI/CD .
 
-### GitHub Actions That Enable CI/CD For Machine Learning
+## GitHub Actions That Enable CI/CD For Machine Learning
 
-- Submitting Argo Workflows (machine learning pipelines on Kubernetes): [GKE version](https://github.com/marketplace/actions/submit-argo-workflows-to-gke), [Cloud agnostic version](https://github.com/marketplace/actions/submit-argo-workflows-from-github)
-- Publishing Docker Images to the GitHub Package Registry: [Actions marketplace](https://github.com/marketplace/actions/publish-docker-images-to-gpr)
+- **Submitting [Argo workflows](https://argoproj.github.io/)** - kick off machine learning pipelines that run on Kubernetes from GitHub:
+  - [On GKE](https://github.com/marketplace/actions/submit-argo-workflows-to-gke)
+  - [Cloud agnostic version](https://github.com/marketplace/actions/submit-argo-workflows-from-github)
 
+- **Publish Docker Images**
+  - [To the GitHub Package Registry](https://github.com/marketplace/actions/publish-docker-images-to-gpr)
+  - [To a generic registry](https://github.com/marketplace/actions/publish-docker)
 
+- **Query Experiment Tracking Results**
+  - From Weights & Biases
+  
 ### Demonstrations of ML CI/CD
 
 TODO
