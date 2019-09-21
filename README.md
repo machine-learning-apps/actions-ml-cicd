@@ -1,6 +1,6 @@
 ## Resources For Machine Learning CI/CD With GitHub Actions
 
-Read [this article](https://blog.paperspace.com/ci-cd-for-machine-learning-ai/) for a primer on what CI/CD for Machine Learning is and where it differs from traditional CI/CD .
+Read [this article](https://blog.paperspace.com/ci-cd-for-machine-learning-ai/) for a primer on what CI/CD for Machine Learning is and how it differs from traditional CI/CD .
 
 ## GitHub Actions That Enable CI/CD For Machine Learning
 
