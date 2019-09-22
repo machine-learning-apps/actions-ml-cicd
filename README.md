@@ -9,7 +9,7 @@ Read [this article](https://blog.paperspace.com/ci-cd-for-machine-learning-ai/) 
   - [Cloud agnostic](https://github.com/marketplace/actions/submit-argo-workflows-from-github) - requires that you supply a kubeconfig file to authenticate to your k8 cluster.
 
 - **Query Experiment Tracking Results**
-  - From Weights & Biases
+  - Fetch runs [from Weights & Biases](https://github.com/machine-learning-apps/wandb-action)
 
 - **Publish Docker Images**
   - [To the GitHub Package Registry](https://github.com/marketplace/actions/publish-docker-images-to-gpr)
