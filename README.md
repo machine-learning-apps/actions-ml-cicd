@@ -14,7 +14,7 @@ Read [this article](https://blog.paperspace.com/ci-cd-for-machine-learning-ai/) 
   - [Action: Fetch runs from Weights & Biases](https://github.com/marketplace/actions/get-runs-from-weights-biases) - W&B is an experiment tracking and logging system for machine learning, and is free for open source projects.
 
 ### 3. Publish Docker Images
-  - [Action: Publish Container To The GitHub Package Registry](https://github.com/marketplace/actions/publish-docker-images-to-gpr).  See this [doc](https://github.com/features/package-registry) on more information about the GitHub Package Registry
+  - [Action: Publish Container To The GitHub Package Registry](https://github.com/marketplace/actions/publish-docker-images-to-gpr).  See this [doc](https://github.com/features/package-registry) on more information on the GitHub Package Registry
   - [Action Publish Container To a Generic Registry](https://github.com/marketplace/actions/publish-docker)
 
 
