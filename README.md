@@ -11,7 +11,7 @@ Allows you to instantiate  machine learning pipelines that run on Kubernetes fro
   - [Action: Submit Argo Workflows on K8s (Cloud agnostic)](https://github.com/marketplace/actions/submit-argo-workflows-from-github) - requires that you supply a kubeconfig file to authenticate to your k8 cluster.
 
 ### 2. Query Experiment Tracking Results
-  - [Action: Fetch runs from Weights & Biases](https://github.com/machine-learning-apps/wandb-action)
+  - [Action: Fetch runs from Weights & Biases (W$B)](https://github.com/machine-learning-apps/wandb-action) - W&B is an experiment tracking and logging system for machine learning, and is free for open source projects.
 
 ### 3. Publish Docker Images
   - [Action: Publish Container To The GitHub Package Registry](https://github.com/marketplace/actions/publish-docker-images-to-gpr).  See this [doc](https://github.com/features/package-registry) on more information about the GitHub Package Registry
