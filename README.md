@@ -5,7 +5,7 @@ Read [this article](https://blog.paperspace.com/ci-cd-for-machine-learning-ai/) 
 ## GitHub Actions That Enable CI/CD For Machine Learning
 
 ### 1. ChatOps
-   - [Action: ChatOps From Pull Requests]: Listens to ChatOps commands in PRs and emits variables that downstream Actions can branch on.
+   - [Action: ChatOps From Pull Requests](https://github.com/marketplace/actions/chatops-for-actions): Listens to ChatOps commands in PRs and emits variables that downstream Actions can branch on.
 
 ### 2. Submitting Argo workflows
 [Argo](https://argoproj.github.io/) allows you to orechestrate machine learning pipelines that run on Kubernetes.
