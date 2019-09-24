@@ -18,7 +18,7 @@ Read [this article](https://blog.paperspace.com/ci-cd-for-machine-learning-ai/) 
 
 ### 4. Publish Docker Images
   - [Action: Publish Container To The GitHub Package Registry](https://github.com/marketplace/actions/publish-docker-images-to-gpr).  See this [doc](https://github.com/features/package-registry) on more information on the GitHub Package Registry
-  - [Action Publish Container To a Generic Registry](https://github.com/marketplace/actions/publish-docker)
+  - [Action: Publish Container To a Generic Registry](https://github.com/marketplace/actions/publish-docker)
 
 
 ## Demonstrations of ML CI/CD
