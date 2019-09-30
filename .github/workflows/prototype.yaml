@@ -1,4 +1,4 @@
-name: Get token
+name: Get token for prototyping
 on: push
 
 jobs:
