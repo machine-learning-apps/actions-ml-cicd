@@ -13,7 +13,11 @@ from tensorflow.keras.optimizers import Nadam
 from tensorflow.keras.callbacks import CSVLogger, ModelCheckpoint
 import wandb
 from wandb.keras import WandbCallback
-wandb.init(project="predict-issue-labels", entity="github")
+
+github_sha = os.getenv('GITHUB_SHA')
+wandb.init(project="test-wandb-action", entity="hamelsmu")
+wandb.config.github_sha = github_sha
+wandb.config.secondary_sha = ''
 
 
 input_dir = "/data/"

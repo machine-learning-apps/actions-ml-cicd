@@ -5,7 +5,12 @@ metadata:
   labels:
     workflow: actions 
 spec:
-  entrypoint: actions 
+  entrypoint: actions
+  arguments:
+    parameters:
+    - name: GITHUB-SHA
+      value: NOT_SUPPLIED
+
   templates:
   - name: actions 
     dag:
@@ -62,6 +67,9 @@ spec:
           secretKeyRef:
             name: ml-cicd
             key: WANDB_USERNAME
+      - name: GITHUB_SHA
+        value: "{{workflow.parameters.GITHUB-SHA}}"
+
     outputs:
      artifacts:
      - name: model
