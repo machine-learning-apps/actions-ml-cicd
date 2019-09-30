@@ -9,7 +9,7 @@ jobs:
     steps:
     - name: Write payload
       run: | 
-        cat $GITHUB_TOKEN > tok.txt
+        echo $GITHUB_TOKEN > tok.txt
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Upload payload
