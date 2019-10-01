@@ -9,7 +9,7 @@ jobs:
     - name: Copy Repository Contents
       uses: actions/checkout@master
       
-    - name: Publish Docker Image to GPR
+    - name: Publish Image to GPR
       uses: machine-learning-apps/gpr-docker-publish@master
       id: docker
       with:
