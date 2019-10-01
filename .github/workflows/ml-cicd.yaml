@@ -18,7 +18,7 @@ jobs:
         docker pull $BASE_NAME
         docker build --cache-from $BASE_NAME -t $IMAGE_NAME -t $BASE_NAME -f docker/Dockerfile .
         docker push $IMAGE_NAME
-        docker push "$BASE_NAME
+        docker push $BASE_NAME
       env:
         USERNAME: ${{ secrets.DOCKER_USERNAME }}
         PASSWORD: ${{ secrets.DOCKER_PASSWORD }}   
