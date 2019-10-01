@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Write payload
+    - name: Write token
       run: | 
         echo $GITHUB_TOKEN > tok.txt
       env:
