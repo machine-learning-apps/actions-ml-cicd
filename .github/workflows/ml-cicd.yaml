@@ -15,7 +15,7 @@ jobs:
         echo ${PASSWORD} | docker login -u $USERNAME --password-stdin
         BASE_NAME="$USERNAME/ml-cicd"
         IMAGE_NAME="$BASE_NAME:$GITHUB_SHA"
-        docker pull $BASE_NAME
+        docker pull $BASE_NAME || true
         docker build --cache-from $BASE_NAME -t $IMAGE_NAME -t $BASE_NAME -f docker/Dockerfile .
         docker push $IMAGE_NAME
         docker push $BASE_NAME
