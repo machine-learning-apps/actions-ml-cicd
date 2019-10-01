@@ -20,4 +20,9 @@ jobs:
         dockerfile: 'docker/Dockerfile'
         workdir: '.'
         cache: true
-        
+
+    - name: Show outputs of pervious step
+      run: |
+        echo "The name tag of the Docker Image is $VAR1"
+      env:
+        VAR1: ${{ steps.docker.outputs.tag }}        
