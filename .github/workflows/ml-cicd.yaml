@@ -15,7 +15,7 @@ jobs:
       with:
         USERNAME: ${{ secrets.DOCKER_USERNAME }}
         PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        IMAGE_NAME: 'test-docker-action'
+        IMAGE_NAME: 'ml-cicd'
         DOCKERFILE_PATH: 'docker/gpu.Dockerfile'
         BUILD_CONTEXT: '.'
         CACHE: true
