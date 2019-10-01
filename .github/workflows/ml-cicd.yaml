@@ -48,8 +48,12 @@ jobs:
     needs: [build-cpu-image, build-gpu-image]
     runs-on: ubuntu-latest
     steps: 
+      
        - name: Copy Repo Files
          uses: actions/checkout@master
+
+       - name: Build param file
+         run: echo "GITHUB-SHA: $GITHUB_SHA" > argo/params.yml
 
        - name: Submit Argo Deployment
          id: argo
@@ -57,13 +61,10 @@ jobs:
          with:
            ARGO_URL: ${{ secrets.ARGO_URI }}
            APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
-           PROJECT_ID: ${{ secrets.GCLOUD_PROJECT_ID }}
+           PROJECT_ID: ${{ secrets.GOOGLE_PROJECT_ID }}
            LOCATION_ZONE: "us-west1-a"
            CLUSTER_NAME: "github-actions-demo"
            WORKFLOW_YAML_PATH: argo/workflow.yaml # the argo workflow file relative to the repo's root.
            PARAMETER_FILE_PATH: argo/params.yml # optional parameter file.  This can be built dynamically inside the action or appended to from an existing file in the repo.
-        
-      
-
 
 
