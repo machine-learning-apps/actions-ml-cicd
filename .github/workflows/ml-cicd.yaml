@@ -20,7 +20,7 @@ jobs:
         BUILD_CONTEXT: '.'
         CACHE: true
     
-    - name: Show outputs of GPR step1
+    - name: Show outputs of GPR step
       run: |
         echo "The name:tag of the Docker Image is: $VAR1"
         echo "The docker image is hosted at $VAR2"
