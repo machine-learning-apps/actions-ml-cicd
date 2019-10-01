@@ -13,10 +13,12 @@ jobs:
       run: |
         cd $GITHUB_WORKSPACE
         echo ${PASSWORD} | docker login -u $USERNAME --password-stdin
-        IMAGE_NAME="$USERNAME/ml-cicd:$GITHUB_SHA"
-        echo $IMAGE_NAME
-        docker build -t $IMAGE_NAME -f docker/Dockerfile .
+        BASE_NAME="$USERNAME/ml-cicd"
+        IMAGE_NAME="$BASE_NAME:$GITHUB_SHA"
+        docker pull $BASE_NAME
+        docker build --cache-from $BASE_NAME -t $IMAGE_NAME -t $BASE_NAME -f docker/Dockerfile .
         docker push $IMAGE_NAME
+        docker push "$BASE_NAME
       env:
         USERNAME: ${{ secrets.DOCKER_USERNAME }}
         PASSWORD: ${{ secrets.DOCKER_PASSWORD }}   
