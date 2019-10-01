@@ -16,7 +16,6 @@ jobs:
         name: hamelsmu/ml-cicd
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        registry: docker.pkg.github.com
         dockerfile: 'docker/Dockerfile'
         workdir: '.'
         cache: true
