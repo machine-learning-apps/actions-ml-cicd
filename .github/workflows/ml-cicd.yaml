@@ -9,19 +9,14 @@ jobs:
     - name: Copy Repository Contents
       uses: actions/checkout@master
       
-    - name: Publish Image to GPR
-      uses: elgohr/Publish-Docker-Github-Action@master
-      id: docker
-      with:
-        name: hamelsmu/ml-cicd
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-        dockerfile: 'docker/Dockerfile'
-        workdir: '.'
-        cache: true
-
-    - name: Show outputs of pervious step
+    - name: Publish Image to DockerHub
       run: |
-        echo "The name tag of the Docker Image is $VAR1"
+        cd $GITHUB_WORKSPACE
+        echo ${PASSWORD} | docker login -u $USERNAME --password-stdin
+        IMAGE_NAME="$USERNAME/ml-cicd:$GITHUB_SHA"
+        echo $IMAGE_NAME
+        docker build -t $IMAGE_NAME -f docker/Dockerfile .
+        docker push $IMAGE_NAME
       env:
-        VAR1: ${{ steps.docker.outputs.tag }}        
+        USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        PASSWORD: ${{ secrets.DOCKER_PASSWORD }}   
