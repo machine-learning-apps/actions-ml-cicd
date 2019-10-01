@@ -1,21 +1,29 @@
 name: ML Workflow Via Actions
-on:
-  pull_request:
-    types:
-      - labeled
+on: push
 
 jobs:
-  validate_run:
+  test-run:
     runs-on: ubuntu-latest
     steps:
 
-    - name: Copy Repo Files
+    - name: Copy Repository Contents
       uses: actions/checkout@master
       
-    - name: Validate Payload
-      id: validate
-      run: python gke-argo-action/validate_payload.py
+    - name: Publish Docker Image to GPR
+      uses: machine-learning-apps/gpr-docker-publish@master
+      id: docker
+      with:
+        USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        IMAGE_NAME: 'test-docker-action'
+        DOCKERFILE_PATH: 'docker/gpu.Dockerfile'
+        BUILD_CONTEXT: "${GITHUB_WORKSPACE}"
+    
+    - name: Show outputs of pervious step
+      run: |
+        echo "The name:tag of the Docker Image is: $VAR1"
+        echo "The docker image is hosted at $VAR2"
       env:
-        TRIGGER_LABEL_NAME: 'run/model-ci' 
-        
+        VAR1: ${{ steps.docker.outputs.IMAGE_SHA_NAME }}
+        VAR2: ${{ steps.docker.outputs.IMAGE_URL }}
         
