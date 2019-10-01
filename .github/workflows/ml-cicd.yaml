@@ -18,6 +18,7 @@ jobs:
         IMAGE_NAME: 'test-docker-action'
         DOCKERFILE_PATH: 'docker/gpu.Dockerfile'
         BUILD_CONTEXT: '.'
+        CACHE: true
     
     - name: Show outputs of pervious step
       run: |
