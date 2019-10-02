@@ -10,6 +10,10 @@ spec:
     parameters:
     - name: GITHUB-SHA
       value: NOT_SUPPLIED
+    - name: WANDB-ENTITY
+      value: NOT_SUPPLIED
+    - name: WANDB-PROJECT
+      value: NOT_SUPPLIED
 
   templates:
   - name: actions 
