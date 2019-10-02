@@ -84,7 +84,7 @@ jobs:
     - name: Comment With Metadata
       if: steps.label.outputs.TRIGGERED == 'true'
       run: |
-        bash action_files/pr_comment.sh "ML Workflow For SHA $SHA has been instantiated:\nLinks: [Argo Workflow]($ARGO_LINK) | [W&B Project](https://app.wandb.ai/$WANDB_ENTITY/$WANDB_PROJECT)\n\nCheck `Argo-Workflow` created, will be marked as a success/failure when workflow finishes."
+        bash action_files/pr_comment.sh "ML Workflow For SHA $SHA has been instantiated:\nLinks: [Argo Workflow]($ARGO_LINK) | [W&B Project](https://app.wandb.ai/$WANDB_ENTITY/$WANDB_PROJECT)\n\nCheck \`Argo-Workflow\` created, will be marked as a success/failure when workflow finishes."
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         ARGO_LINK: ${{ steps.argo.outputs.WORKFLOW_URL }}
