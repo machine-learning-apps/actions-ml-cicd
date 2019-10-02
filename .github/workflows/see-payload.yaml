@@ -1,7 +1,5 @@
 name: see-payload
-on: 
-  pull_request:
-    types: [labeled]
+on: [gollum]
 
 jobs:
 
