@@ -21,5 +21,5 @@ labels = val['pull_request']['labels']
 label_names = [label['name'] for label in labels if labels and 'name' in label]
 print(label_names)
 
-print('::set-output name=ARGO_TEST_RUN::{}'.format(test_trigger_label_name in label_names))
+print('::set-output name=TRIGGERED::{}'.format(test_trigger_label_name in label_names))
 print('::set-output name=ISSUE_NUMBER::{}'.format(val['number']))
