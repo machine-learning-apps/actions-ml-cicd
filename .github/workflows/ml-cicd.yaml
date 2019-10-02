@@ -69,6 +69,6 @@ jobs:
         PARAMETER_FILE_PATH: "argo/params.yml" # optional parameter file.
   
     - name: Create Check
-        run: echo "Hello"
+      run: echo "Hello"
 
 
