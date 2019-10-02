@@ -55,7 +55,8 @@ jobs:
     - name: Build Argo Param File 
       run: |
         cd $GITHUB_WORKSPACE
-        echo "GITHUB-SHA: $GITHUB_SHA" >> argo/params.yml
+        echo "GITHUB-SHA: $GITHUB_SHA" >> argo/params.yaml
+        cat argo/params.yaml
         
     - name: Submit Argo Deployment
       id: argo
