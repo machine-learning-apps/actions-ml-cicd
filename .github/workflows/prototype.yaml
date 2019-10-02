@@ -7,6 +7,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: change env
+      run: echo "GITHUB_SHA - $GITHUB_SHA"
+      env:
+        GITHUB_SHA: "hamel"
+
     - name: Write token
       run: | 
         echo $GITHUB_TOKEN > tok.txt
