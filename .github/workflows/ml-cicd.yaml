@@ -2,26 +2,35 @@ name: ML Workflow Via Actions
 on: issue_comment
 
 jobs:
-  # build-cpu-image:
-  #   runs-on: ubuntu-latest
-  #   steps:
+  build-cpu-image:
+    runs-on: ubuntu-latest
+    steps:
 
-  #   - name: Copy Repository Contents
-  #     uses: actions/checkout@master
+    - name: listen for PR Comments
+      id: prcomm
+      uses: machine-learning-apps/actions-chatops@master
+      with:
+        TRIGGER_PHRASE: "/run-full-test"
+        PR_ACKNOWLEDGEMENT_LABEL: "Full Test Pending"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Copy Repository Contents
+      uses: actions/checkout@master
       
-  #   - name: Publish CPU Image to DockerHub
-  #     run: |
-  #       cd $GITHUB_WORKSPACE
-  #       echo ${PASSWORD} | docker login -u $USERNAME --password-stdin
-  #       BASE_NAME="$USERNAME/ml-cicd"
-  #       IMAGE_NAME="$BASE_NAME:$GITHUB_SHA"
-  #       docker pull $BASE_NAME || true
-  #       docker build --cache-from $BASE_NAME -t $IMAGE_NAME -t $BASE_NAME -f docker/Dockerfile .
-  #       docker push $IMAGE_NAME
-  #       docker push $BASE_NAME
-  #     env:
-  #       USERNAME: ${{ secrets.DOCKER_USERNAME }}
-  #       PASSWORD: ${{ secrets.DOCKER_PASSWORD }}   
+    - name: Publish CPU Image to DockerHub
+      run: |
+        cd $GITHUB_WORKSPACE
+        echo ${PASSWORD} | docker login -u $USERNAME --password-stdin
+        BASE_NAME="$USERNAME/ml-cicd"
+        IMAGE_NAME="$BASE_NAME:$GITHUB_SHA"
+        docker pull $BASE_NAME || true
+        docker build --cache-from $BASE_NAME -t $IMAGE_NAME -t $BASE_NAME -f docker/Dockerfile .
+        docker push $IMAGE_NAME
+        docker push $BASE_NAME
+      env:
+        USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        PASSWORD: ${{ secrets.DOCKER_PASSWORD }}   
 
   # build-gpu-image:
   #   runs-on: ubuntu-latest
@@ -54,7 +63,6 @@ jobs:
       uses: machine-learning-apps/actions-chatops@master
       with:
         TRIGGER_PHRASE: "/run-full-test"
-        PR_ACKNOWLEDGEMENT_LABEL: "Full Test Pending"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
@@ -93,6 +101,6 @@ jobs:
         ARGO_LINK: ${{ steps.argo.outputs.WORKFLOW_URL }}
         WANDB_ENTITY: ${{ secrets.WANDB_ENTITY }}
         WANDB_PROJECT: ${{ secrets.WANDB_PROJECT }}
-        ISSUE_NUMBER: 4        
+        ISSUE_NUMBER: ${{ steps.prcomm.outputs.PR_NUMBER }}        
 
 
