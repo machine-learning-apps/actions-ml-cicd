@@ -1,0 +1,19 @@
+name: test checks api
+on: push
+
+jobs:  
+  test-checks:
+    runs-on: ubuntu-latest
+    steps: 
+      
+    - name: Copy Repo Files
+      uses: actions/checkout@master
+  
+    - name: Create Check
+      run: |
+        python3 action_files/create_check_run.py "in_progress" "Test-Argo-Workflow" "ML Workflow For SHA $GITHUB_SHA" "Links [Argo Workflow]($ARGO_LINK) | [W&B Project](https://app.wandb.ai/$WANDB_ENTITY/$WANDB_PROJECT)"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        ARGO_LINK: ${{ steps.argo.outputs.WORKFLOW_URL }}
+        WANDB_ENTITY: ${{ secrets.WANDB_ENTITY }}
+        WANDB_PROJECT: ${{ secrets.WANDB_PROJECT }}
