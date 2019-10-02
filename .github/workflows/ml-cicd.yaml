@@ -67,5 +67,8 @@ jobs:
            CLUSTER_NAME: "github-actions-demo"
            WORKFLOW_YAML_PATH: argo/workflow.yaml # the argo workflow file relative to the repo's root.
            PARAMETER_FILE_PATH: argo/params.yml # optional parameter file.
+      
+      - name: Create Check
+        run: echo "Hello"
 
 
