@@ -52,7 +52,9 @@ jobs:
       if: steps.label.outputs.TRIGGERED == 'true'
       run: |
         cd $GITHUB_WORKSPACE
-        echo "GITHUB-SHA: $GITHUB_SHA" >> argo/params.yaml
+        echo "GITHUB-SHA: $SHA" >> argo/params.yaml
+      env:
+        SHA: ${{ steps.label.outputs.HEAD_SHA }}
           
     - name: Submit Argo Deployment
       if: steps.label.outputs.TRIGGERED == 'true'
@@ -66,6 +68,7 @@ jobs:
         CLUSTER_NAME: "github-actions-demo"
         WORKFLOW_YAML_PATH: "argo/workflow.yaml" # the argo workflow file relative to the repo's root.
         PARAMETER_FILE_PATH: "argo/params.yaml" # optional parameter file.
+        SHA: ${{ steps.label.outputs.HEAD_SHA }}
   
     - name: Create Check
       if: steps.label.outputs.TRIGGERED == 'true'
