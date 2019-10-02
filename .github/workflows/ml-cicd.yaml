@@ -2,50 +2,50 @@ name: ML Workflow Via Actions
 on: push
 
 jobs:
-  build-cpu-image:
-    runs-on: ubuntu-latest
-    steps:
+  # build-cpu-image:
+  #   runs-on: ubuntu-latest
+  #   steps:
 
-    - name: Copy Repository Contents
-      uses: actions/checkout@master
+  #   - name: Copy Repository Contents
+  #     uses: actions/checkout@master
       
-    - name: Publish CPU Image to DockerHub
-      run: |
-        cd $GITHUB_WORKSPACE
-        echo ${PASSWORD} | docker login -u $USERNAME --password-stdin
-        BASE_NAME="$USERNAME/ml-cicd"
-        IMAGE_NAME="$BASE_NAME:$GITHUB_SHA"
-        docker pull $BASE_NAME || true
-        docker build --cache-from $BASE_NAME -t $IMAGE_NAME -t $BASE_NAME -f docker/Dockerfile .
-        docker push $IMAGE_NAME
-        docker push $BASE_NAME
-      env:
-        USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        PASSWORD: ${{ secrets.DOCKER_PASSWORD }}   
+  #   - name: Publish CPU Image to DockerHub
+  #     run: |
+  #       cd $GITHUB_WORKSPACE
+  #       echo ${PASSWORD} | docker login -u $USERNAME --password-stdin
+  #       BASE_NAME="$USERNAME/ml-cicd"
+  #       IMAGE_NAME="$BASE_NAME:$GITHUB_SHA"
+  #       docker pull $BASE_NAME || true
+  #       docker build --cache-from $BASE_NAME -t $IMAGE_NAME -t $BASE_NAME -f docker/Dockerfile .
+  #       docker push $IMAGE_NAME
+  #       docker push $BASE_NAME
+  #     env:
+  #       USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  #       PASSWORD: ${{ secrets.DOCKER_PASSWORD }}   
 
-  build-gpu-image:
-    runs-on: ubuntu-latest
-    steps:
+  # build-gpu-image:
+  #   runs-on: ubuntu-latest
+  #   steps:
 
-    - name: Copy Repository Contents
-      uses: actions/checkout@master
+  #   - name: Copy Repository Contents
+  #     uses: actions/checkout@master
       
-    - name: Publish GPU Image to DockerHub
-      run: |
-        cd $GITHUB_WORKSPACE
-        echo ${PASSWORD} | docker login -u $USERNAME --password-stdin
-        BASE_NAME="$USERNAME/ml-cicd-gpu"
-        IMAGE_NAME="$BASE_NAME:$GITHUB_SHA"
-        docker pull $BASE_NAME || true
-        docker build --cache-from $BASE_NAME -t $IMAGE_NAME -t $BASE_NAME -f docker/Dockerfile .
-        docker push $IMAGE_NAME
-        docker push $BASE_NAME
-      env:
-        USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+  #   - name: Publish GPU Image to DockerHub
+  #     run: |
+  #       cd $GITHUB_WORKSPACE
+  #       echo ${PASSWORD} | docker login -u $USERNAME --password-stdin
+  #       BASE_NAME="$USERNAME/ml-cicd-gpu"
+  #       IMAGE_NAME="$BASE_NAME:$GITHUB_SHA"
+  #       docker pull $BASE_NAME || true
+  #       docker build --cache-from $BASE_NAME -t $IMAGE_NAME -t $BASE_NAME -f docker/Dockerfile .
+  #       docker push $IMAGE_NAME
+  #       docker push $BASE_NAME
+  #     env:
+  #       USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  #       PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
   
   submit-argo-workflow:
-    needs: [build-cpu-image, build-gpu-image]
+    #needs: [build-cpu-image, build-gpu-image]
     runs-on: ubuntu-latest
     steps: 
       
@@ -71,7 +71,8 @@ jobs:
   
     - name: Create Check
       run: |
-        python3 action_files/create_check_run.py "in_progress" "Argo-Workflow" "ML Workflow For SHA $GITHUB_SHA" "Links [Argo Workflow]($ARGO_LINK) | [W&B Project](https://app.wandb.ai/$WANDB_ENTITY/$WANDB_PROJECT)" " "
+        python3 action_files/create_check_run.py "in_progress" "Argo-Workflow-Running" "ML Workflow For SHA $GITHUB_SHA" "Links [Argo Workflow]($ARGO_LINK) | [W&B Project](https://app.wandb.ai/$WANDB_ENTITY/$WANDB_PROJECT)" " "
+        bash action_files/pr_comment.sh "ML Workflow For SHA $GITHUB_SHA has been instantiated:\nLinks: [Argo Workflow]($ARGO_LINK) | [W&B Project](https://app.wandb.ai/$WANDB_ENTITY/$WANDB_PROJECT) | Docker Registries: [hamelsmu/ml-cicd](https://cloud.docker.com/repository/docker/hamelsmu/ml-cicd), [hamelsmu/ml-cicd-gpu](https://cloud.docker.com/repository/docker/hamelsmu/ml-cicd-gpu)"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         ARGO_LINK: ${{ steps.argo.outputs.WORKFLOW_URL }}
