@@ -15,6 +15,14 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+    - name: Create Check
+      if: steps.prcomm.outputs.TRIGGERED == 'true'
+      run: |
+        python3 action_files/create_check_run.py "in_progress" "build-cpu-image" "" "" ""
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SHA: ${{ steps.prcomm.outputs.SHA }}   
+
     - name: Copy Repository Contents
       uses: actions/checkout@master
       
@@ -23,14 +31,15 @@ jobs:
         cd $GITHUB_WORKSPACE
         echo ${PASSWORD} | docker login -u $USERNAME --password-stdin
         BASE_NAME="$USERNAME/ml-cicd"
-        IMAGE_NAME="$BASE_NAME:$GITHUB_SHA"
+        IMAGE_NAME="$BASE_NAME:$SHA"
         docker pull $BASE_NAME || true
         docker build --cache-from $BASE_NAME -t $IMAGE_NAME -t $BASE_NAME -f docker/Dockerfile .
         docker push $IMAGE_NAME
         docker push $BASE_NAME
       env:
         USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        PASSWORD: ${{ secrets.DOCKER_PASSWORD }}   
+        PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        SHA: ${{ steps.prcomm.outputs.SHA }}   
 
   # build-gpu-image:
   #   runs-on: ubuntu-latest
@@ -76,7 +85,9 @@ jobs:
       if: steps.prcomm.outputs.TRIGGERED == 'true'
       run: |
         cd $GITHUB_WORKSPACE
-        echo "GITHUB-SHA: $GITHUB_SHA" >> argo/params.yaml
+        echo "GITHUB-SHA: $SHA" >> argo/params.yaml
+      env:
+        SHA: ${{ steps.prcomm.outputs.SHA }}
           
     - name: Submit Argo Deployment
       if: steps.prcomm.outputs.TRIGGERED == 'true'
@@ -95,12 +106,13 @@ jobs:
       if: steps.prcomm.outputs.TRIGGERED == 'true'
       run: |
         python3 action_files/create_check_run.py "in_progress" "Argo-Workflow-Running" "ML Workflow For SHA $GITHUB_SHA" "Links [Argo Workflow]($ARGO_LINK) | [W&B Project](https://app.wandb.ai/$WANDB_ENTITY/$WANDB_PROJECT)" " "
-        bash action_files/pr_comment.sh "ML Workflow For SHA $GITHUB_SHA has been instantiated:\nLinks: [Argo Workflow]($ARGO_LINK) | [W&B Project](https://app.wandb.ai/$WANDB_ENTITY/$WANDB_PROJECT) | Docker Registries: [hamelsmu/ml-cicd](https://cloud.docker.com/repository/docker/hamelsmu/ml-cicd), [hamelsmu/ml-cicd-gpu](https://cloud.docker.com/repository/docker/hamelsmu/ml-cicd-gpu)"
+        bash action_files/pr_comment.sh "ML Workflow For SHA $SHA has been instantiated:\nLinks: [Argo Workflow]($ARGO_LINK) | [W&B Project](https://app.wandb.ai/$WANDB_ENTITY/$WANDB_PROJECT) | Docker Registries: [hamelsmu/ml-cicd](https://cloud.docker.com/repository/docker/hamelsmu/ml-cicd), [hamelsmu/ml-cicd-gpu](https://cloud.docker.com/repository/docker/hamelsmu/ml-cicd-gpu)"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         ARGO_LINK: ${{ steps.argo.outputs.WORKFLOW_URL }}
         WANDB_ENTITY: ${{ secrets.WANDB_ENTITY }}
         WANDB_PROJECT: ${{ secrets.WANDB_PROJECT }}
-        ISSUE_NUMBER: ${{ steps.prcomm.outputs.PR_NUMBER }}        
+        ISSUE_NUMBER: ${{ steps.prcomm.outputs.PR_NUMBER }}
+        SHA: ${{ steps.prcomm.outputs.SHA }}        
 
 
