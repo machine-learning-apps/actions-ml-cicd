@@ -19,10 +19,11 @@ parser.add_argument('status', help="either in_progress, or completed")
 parser.add_argument('name')
 parser.add_argument('title')
 parser.add_argument('summary')
+parser.add_argument('text')
 
 def trigger_check(cli_args):
     "Create a checkrun using the GitHub REST API."
-    status, name, title, summary = cli_args.status, cli_args.name, cli_args.title, cli_args.summary
+    status, name, title, summary, text = cli_args.status, cli_args.name, cli_args.title, cli_args.summary, cli_args.text
     
     payload = {
         'name': f'{name}',
@@ -31,6 +32,7 @@ def trigger_check(cli_args):
         'output':{
             'title': f'{title}',
             'summary': f'{summary}',
+            'text': f'{text}'
         },
     }
     print(payload)

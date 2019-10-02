@@ -70,7 +70,7 @@ jobs:
   
     - name: Create Check
       run: |
-        python3 action_files/create_check_run.py "in_progress" "Argo-Workflow" "ML Workflow For SHA $GITHUB_SHA" "Links [Argo Workflow]($ARGO_LINK) | [W&B Project](https://app.wandb.ai/$WANDB_ENTITY/$WANDB_PROJECT)"
+        python3 action_files/create_check_run.py "in_progress" "Argo-Workflow" "ML Workflow For SHA $GITHUB_SHA" "Links [Argo Workflow]($ARGO_LINK) | [W&B Project](https://app.wandb.ai/$WANDB_ENTITY/$WANDB_PROJECT)" " "
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         ARGO_LINK: ${{ steps.argo.outputs.WORKFLOW_URL }}
