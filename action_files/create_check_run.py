@@ -12,7 +12,7 @@ assert sha, "Must supply input GITHUB_SHA"
 
 url = f'https://api.github.com/repos/{location}/check-runs'
 headers = {'authorization': f'token {token}',
-           'accept': 'application/vnd.github.everest-preview+json'}
+           'accept': 'application/vnd.github.antiope-preview+json'}
 
 parser = argparse.ArgumentParser(description='Interact with the Checks Api.')
 parser.add_argument('status', help="either in_progress, or completed")
