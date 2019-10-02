@@ -1,0 +1,13 @@
+name: see-payload
+on: 
+  pull_request:
+    types: [labeled]
+
+jobs:
+
+  see-payload:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: see payload
+      uses: cat $GITHUB_EVENT_PATH
