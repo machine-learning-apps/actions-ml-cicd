@@ -76,7 +76,7 @@ jobs:
         ARGO_LINK: ${{ steps.argo.outputs.WORKFLOW_URL }}
         WANDB_ENTITY: ${{ secrets.WANDB_ENTITY }}
         WANDB_PROJECT: ${{ secrets.WANDB_PROJECT }}
-        SHA: ${{ steps.label.outputs.SHA }}
+        SHA: ${{ steps.label.outputs.HEAD_SHA }}
 
     - name: Comment With Metadata
       if: steps.label.outputs.TRIGGERED == 'true'
@@ -88,4 +88,4 @@ jobs:
         WANDB_ENTITY: ${{ secrets.WANDB_ENTITY }}
         WANDB_PROJECT: ${{ secrets.WANDB_PROJECT }}
         ISSUE_NUMBER: ${{ steps.label.outputs.ISSUE_NUMBER }}
-        SHA: ${{ steps.label.outputs.SHA }}
+        SHA: ${{ steps.label.outputs.HEAD_SHA }}
