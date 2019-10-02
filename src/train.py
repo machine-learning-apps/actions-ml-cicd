@@ -15,7 +15,13 @@ import wandb
 from wandb.keras import WandbCallback
 
 github_sha = os.getenv('GITHUB_SHA')
-wandb.init(project="test-wandb-action", entity="hamelsmu")
+entity = os.getenv('WANDB_ENTITY')
+project = os.getenv('WANDB_PROJECT')
+
+print(f'Entity: {entity}')
+print(f'Project: {project}')
+
+wandb.init()
 wandb.config.github_sha = github_sha
 wandb.config.secondary_sha = ''
 
