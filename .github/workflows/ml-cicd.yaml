@@ -78,5 +78,6 @@ jobs:
         ARGO_LINK: ${{ steps.argo.outputs.WORKFLOW_URL }}
         WANDB_ENTITY: ${{ secrets.WANDB_ENTITY }}
         WANDB_PROJECT: ${{ secrets.WANDB_PROJECT }}
+        ISSUE_NUMBER: 4        
 
 
