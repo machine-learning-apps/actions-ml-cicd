@@ -1,5 +1,5 @@
 name: Get token for prototyping
-on: issue_comment
+on: push
 
 jobs:
   test:
