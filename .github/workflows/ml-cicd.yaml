@@ -54,13 +54,10 @@ jobs:
 
     - name: Build Argo Param File
       run: |
-        cd 
+        cd $GITHUB_WORKSPACE
         echo "GITHUB-SHA: $GITHUB_SHA" >> argo/params.yml
-
-    - name: See Argo Param File
-      run: |
         cat argo/params.yml
-
+        
     - name: Submit Argo Deployment
       id: argo
       uses: machine-learning-apps/gke-argo@master
