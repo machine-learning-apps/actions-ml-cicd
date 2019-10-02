@@ -52,7 +52,7 @@ jobs:
     - name: Copy Repo Files
       uses: actions/checkout@master
 
-    - name: Build Argo Param File
+    - name: Build and Print Argo Param File 
       run: |
         cd $GITHUB_WORKSPACE
         echo "GITHUB-SHA: $GITHUB_SHA" >> argo/params.yml
