@@ -7,4 +7,4 @@ jobs:
     steps:
 
     - name: see python versions
-      run: ls -ls /usr/bin/python*
+      run: python3 -V
