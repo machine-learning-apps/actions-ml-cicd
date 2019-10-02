@@ -52,11 +52,10 @@ jobs:
     - name: Copy Repo Files
       uses: actions/checkout@master
 
-    - name: Build and Print Argo Param File 
+    - name: Build Argo Param File 
       run: |
         cd $GITHUB_WORKSPACE
         echo "GITHUB-SHA: $GITHUB_SHA" >> argo/params.yml
-        cat argo/params.yml
         
     - name: Submit Argo Deployment
       id: argo
@@ -68,7 +67,7 @@ jobs:
         LOCATION_ZONE: "us-west1-a"
         CLUSTER_NAME: "github-actions-demo"
         WORKFLOW_YAML_PATH: "argo/workflow.yaml" # the argo workflow file relative to the repo's root.
-        PARAMETER_FILE_PATH: "argo/params.yml" # optional parameter file.
+        PARAMETER_FILE_PATH: "argo/params.yaml" # optional parameter file.
   
     - name: Create Check
       run: |
