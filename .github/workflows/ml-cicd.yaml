@@ -45,7 +45,7 @@ jobs:
   #       PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
   
   submit-argo-workflow:
-    needs: [build-cpu-image, build-gpu-image]
+    #needs: [build-cpu-image, build-gpu-image]
     runs-on: ubuntu-latest
     steps: 
       
