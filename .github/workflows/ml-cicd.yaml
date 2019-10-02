@@ -71,7 +71,6 @@ jobs:
       if: steps.label.outputs.TRIGGERED == 'true'
       run: |
         python3 action_files/create_check_run.py "in_progress" "Argo-Workflow-Running" "ML Workflow For SHA $GITHUB_SHA" "Links [Argo Workflow]($ARGO_LINK) | [W&B Project](https://app.wandb.ai/$WANDB_ENTITY/$WANDB_PROJECT)" " "
-        bash action_files/pr_comment.sh "ML Workflow For SHA $GITHUB_SHA has been instantiated:\nLinks: [Argo Workflow]($ARGO_LINK) | [W&B Project](https://app.wandb.ai/$WANDB_ENTITY/$WANDB_PROJECT) | Docker Registries: [ml-cicd](https://cloud.docker.com/repository/docker/hamelsmu/ml-cicd), [ml-cicd-gpu](https://cloud.docker.com/repository/docker/hamelsmu/ml-cicd-gpu)"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         ARGO_LINK: ${{ steps.argo.outputs.WORKFLOW_URL }}
