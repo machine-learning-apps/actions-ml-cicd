@@ -4,7 +4,7 @@ import argparse
 
 token = os.getenv('GITHUB_TOKEN')
 location = os.getenv('GITHUB_REPOSITORY')
-sha = os.getenv('GITHUB_SHA')
+sha = os.getenv('SHA')
 
 assert token, "Must supply input GITHUB_TOKEN"
 assert location, "Must supply input GITHUB_REPOSITORY"

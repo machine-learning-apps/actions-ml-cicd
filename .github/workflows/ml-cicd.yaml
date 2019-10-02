@@ -70,20 +70,22 @@ jobs:
     - name: Create Check
       if: steps.label.outputs.TRIGGERED == 'true'
       run: |
-        python3 action_files/create_check_run.py "in_progress" "Argo-Workflow-Running" "ML Workflow For SHA $GITHUB_SHA" "Links [Argo Workflow]($ARGO_LINK) | [W&B Project](https://app.wandb.ai/$WANDB_ENTITY/$WANDB_PROJECT)" " "
+        python3 action_files/create_check_run.py "in_progress" "Argo-Workflow-Running" "ML Workflow For SHA $SHA" "Links [Argo Workflow]($ARGO_LINK) | [W&B Project](https://app.wandb.ai/$WANDB_ENTITY/$WANDB_PROJECT)" " "
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         ARGO_LINK: ${{ steps.argo.outputs.WORKFLOW_URL }}
         WANDB_ENTITY: ${{ secrets.WANDB_ENTITY }}
         WANDB_PROJECT: ${{ secrets.WANDB_PROJECT }}
+        SHA: ${{ steps.label.outputs.SHA }}
 
     - name: Comment With Metadata
       if: steps.label.outputs.TRIGGERED == 'true'
       run: |
-        bash action_files/pr_comment.sh "ML Workflow For SHA $GITHUB_SHA has been instantiated:\nLinks: [Argo Workflow]($ARGO_LINK) | [W&B Project](https://app.wandb.ai/$WANDB_ENTITY/$WANDB_PROJECT) | Docker Registries: [ml-cicd](https://cloud.docker.com/repository/docker/hamelsmu/ml-cicd), [ml-cicd-gpu](https://cloud.docker.com/repository/docker/hamelsmu/ml-cicd-gpu)"
+        bash action_files/pr_comment.sh "ML Workflow For SHA $SHA has been instantiated:\nLinks: [Argo Workflow]($ARGO_LINK) | [W&B Project](https://app.wandb.ai/$WANDB_ENTITY/$WANDB_PROJECT) | Docker Registries: [ml-cicd](https://cloud.docker.com/repository/docker/hamelsmu/ml-cicd), [ml-cicd-gpu](https://cloud.docker.com/repository/docker/hamelsmu/ml-cicd-gpu)"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         ARGO_LINK: ${{ steps.argo.outputs.WORKFLOW_URL }}
         WANDB_ENTITY: ${{ secrets.WANDB_ENTITY }}
         WANDB_PROJECT: ${{ secrets.WANDB_PROJECT }}
         ISSUE_NUMBER: ${{ steps.label.outputs.ISSUE_NUMBER }}
+        SHA: ${{ steps.label.outputs.SHA }}
