@@ -1,5 +1,7 @@
 name: Get token for prototyping
-on: push
+on: 
+  pull_request:
+    types: [labeled]
 
 jobs:
   test:
