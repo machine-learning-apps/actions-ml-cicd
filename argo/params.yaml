@@ -1,1 +1,2 @@
-GITHUB-SHA: param-file-test-123
+WANDB-ENTITY: github
+WANDB-PROJECT: predict-issue-labels

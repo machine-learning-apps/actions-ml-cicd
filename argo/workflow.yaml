@@ -69,6 +69,10 @@ spec:
             key: WANDB_USERNAME
       - name: GITHUB_SHA
         value: "{{workflow.parameters.GITHUB-SHA}}"
+      - name: WANDB_ENTITY
+        value: "{{workflow.parameters.WANDB-ENTITY}}"
+      - name: WANDB_PROJECT
+        value: "{{workflow.parameters.WANDB-PROJECT}}"
 
     outputs:
      artifacts:
