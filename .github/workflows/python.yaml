@@ -1,0 +1,10 @@
+name: See python versions
+on: push
+
+jobs:
+  build-cpu-image:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: see python versions
+      run: ls -ls /usr/bin/python*
