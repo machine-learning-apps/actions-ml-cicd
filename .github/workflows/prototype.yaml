@@ -1,5 +1,5 @@
 name: Get token for prototyping
-on: [gollum]
+on: [push]
 
 jobs:
   test:
