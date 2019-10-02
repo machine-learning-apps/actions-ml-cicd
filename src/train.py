@@ -21,7 +21,7 @@ project = os.getenv('WANDB_PROJECT')
 print(f'Entity: {entity}')
 print(f'Project: {project}')
 
-wandb.init(project=project, entity=entity)
+wandb.init()
 wandb.config.github_sha = github_sha
 wandb.config.secondary_sha = ''
 
