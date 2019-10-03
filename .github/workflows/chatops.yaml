@@ -1,0 +1,13 @@
+name: ChatOps
+on: [issue_comment]
+
+jobs:
+  label-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: machine-learning-apps/actions-chatops-workaround@master
+        with:
+          APP_PEM: ${{ secrets.APP_PEM }}
+          APP_ID: ${{ secrets.APP_ID }}
+          TRIGGER_PHRASE: "/run-full-test"
+          INDICATOR_LABEL: "Full Test Pending"
