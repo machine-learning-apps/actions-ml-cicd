@@ -41,6 +41,7 @@ jobs:
         WANDB_PROJECT: ${{ secrets.WANDB_PROJECT }}
 
     - name: Upload csv
+      if: steps.wandb.outputs.BOOL_COMPLETE == 'true'
       uses: actions/upload-artifact@v1
       with:
         name: wandb_report
