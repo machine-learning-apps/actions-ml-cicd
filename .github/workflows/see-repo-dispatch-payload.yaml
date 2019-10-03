@@ -19,8 +19,10 @@ jobs:
       uses: actions/checkout@master
     
     - name: handle repo dispatch payload
+      id: rd
       run: |
         cd $GITHUB_WORKSPACE
-        python3 action_files/label_app.py
+        python3 action_files/repo_dispatch_handler.py
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}     
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
