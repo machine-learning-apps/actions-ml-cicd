@@ -1,0 +1,7 @@
+name: test
+on: [push]
+
+jobs:
+  test:
+    name: see if works
+    run: pip3 install github3.py jwt requests cryptography
