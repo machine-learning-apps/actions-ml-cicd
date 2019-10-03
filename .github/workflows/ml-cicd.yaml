@@ -87,7 +87,7 @@ jobs:
     - name: Comment With Metadata
       if: steps.label.outputs.TRIGGERED == 'true'
       run: |
-        bash action_files/pr_comment.sh "**[ML Workflow]($ARGO_LINK) For SHA $SHA has been instantiated.**\n\nThe following Docker images built and tagged w/SHA: \n - [hamelsmu/ml-cicd:$SHA](https://cloud.docker.com/u/hamelsmu/repository/docker/hamelsmu/ml-cicd)\n - [hamelsmu/ml-cicd-gpu:$SHA](https://cloud.docker.com/u/hamelsmu/repository/docker/hamelsmu/ml-cicd-gpu)\n\nCheck run \`Argo-Workflow\` created, with status pending completion of the workflow."
+        bash action_files/pr_comment.sh "### [ML Workflow]($ARGO_LINK) For SHA $SHA has been instantiated.\n\nThe following Docker images built and tagged w/SHA: \n - [hamelsmu/ml-cicd](https://cloud.docker.com/u/hamelsmu/repository/docker/hamelsmu/ml-cicd)\n - [hamelsmu/ml-cicd-gpu](https://cloud.docker.com/u/hamelsmu/repository/docker/hamelsmu/ml-cicd-gpu)\n\nCheck run \`Argo-Workflow\` created, with status pending completion of the workflow."
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         ARGO_LINK: ${{ steps.argo.outputs.WORKFLOW_URL }}
