@@ -7,22 +7,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Write payload
-      run: cat $GITHUB_EVENT_PATH > payload.json
-
-    - name: Upload payload
-      uses: actions/upload-artifact@v1
-      with:
-        name: payload
-        path: payload.json
-
     - name: Copy Repository Contents
       uses: actions/checkout@master
     
     - name: handle repo dispatch payload
       id: rd
       run: |
-        ls
+        ls action_files/
         python3 action_files/repo_dispatch_handler.py
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
