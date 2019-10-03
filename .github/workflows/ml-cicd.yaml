@@ -84,7 +84,7 @@ jobs:
     - name: Comment With Metadata
       if: steps.label.outputs.TRIGGERED == 'true'
       run: |
-        bash action_files/pr_comment.sh "ML Workflow For SHA $SHA has been instantiated.\nCheck run \`Argo-Workflow\` created, whose status will be updated when the [Argo workflow]($ARGO_LINK) finishes."
+        bash action_files/pr_comment.sh "[ML Workflow]($ARGO_LINK) For SHA $SHA has been instantiated.\nCheck run \`Argo-Workflow\` created, with status pending completion of the workflow."
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         ARGO_LINK: ${{ steps.argo.outputs.WORKFLOW_URL }}
