@@ -1,5 +1,5 @@
 name: Model Runs Completed
-on: repository_dispatch
+on: issue_comment
 
 jobs:
   test:
