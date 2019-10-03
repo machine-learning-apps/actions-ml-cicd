@@ -6,4 +6,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: see if works
-      run: pip3 install github3.py jwt requests cryptography
+      run: | 
+       apt install python3-pip
+       pip3 install github3.py jwt requests cryptography
