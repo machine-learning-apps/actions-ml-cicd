@@ -7,5 +7,5 @@ jobs:
     steps:
     - name: see if works
       run: | 
-       sudo apt install python3-pip
+       sudo apt-get install python3-pip python3-setuptools
        pip3 install github3.py jwt requests cryptography
