@@ -3,10 +3,13 @@ on: [push]
 
 jobs:
   test:
-    runs-on: python:alpine3.6
+    runs-on: ubuntu-latest
     steps:
     - name: Copy Repository Contents
       uses: actions/checkout@master
+    - name: see what happens
+      uses: docker://python:alpine3.6
+      run: echo "Hello World"
 
     # - name: see if works
     #   run: | 
