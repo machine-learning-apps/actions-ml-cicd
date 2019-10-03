@@ -5,11 +5,10 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - name: Copy Repository Contents
-      uses: actions/checkout@master
+    # - name: Copy Repository Contents
+    #   uses: actions/checkout@master
     - name: see what happens
       uses: docker://python:alpine3.6
-      run: echo "Hello World"
 
     # - name: see if works
     #   run: | 
