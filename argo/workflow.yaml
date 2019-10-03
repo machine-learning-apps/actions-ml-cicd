@@ -6,6 +6,7 @@ metadata:
     workflow: actions 
 spec:
   entrypoint: actions
+  onExit: exit-handler
   arguments:
     parameters:
     - name: GITHUB-SHA
@@ -82,3 +83,29 @@ spec:
      artifacts:
      - name: model
        path: /output
+
+  - name: exit-handler
+    steps:
+    - - name: success
+        template: success
+        when: "{{workflow.status}} == Succeeded"
+    - - name: fail
+        template: fail
+        when: "{{workflow.status}} != Succeeded"
+  - name: success
+    script:
+      image: python:alpine3.6
+      command: [python]
+      source: |
+        import os
+        sha = os.getenv('GITHUB_SHA')
+        print(f'{sha}')
+      env:
+      - name: GITHUB_SHA
+        value: "{{workflow.parameters.GITHUB-SHA}}"
+  - name: fail
+    script:
+      image: python:alpine3.6
+      command: [python]
+      source: |
+        print('Fail!')
