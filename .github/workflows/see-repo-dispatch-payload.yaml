@@ -14,3 +14,13 @@ jobs:
       with:
         name: payload
         path: payload.json
+
+    - name: Copy Repository Contents
+      uses: actions/checkout@master
+    
+    - name: handle repo dispatch payload
+      run: |
+        cd $GITHUB_WORKSPACE
+        python3 action_files/label_app.py
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}     
