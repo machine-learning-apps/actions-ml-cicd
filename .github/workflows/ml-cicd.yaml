@@ -73,7 +73,7 @@ jobs:
     - name: Create Check
       if: steps.label.outputs.TRIGGERED == 'true'
       run: |
-        python3 action_files/create_check_run.py "in_progress" "Argo-Workflow" "ML Workflow For SHA $SHA" "Links [Argo Workflow]($ARGO_LINK) | [W&B Project](https://app.wandb.ai/$WANDB_ENTITY/$WANDB_PROJECT)" " "
+        python3 action_files/create_check_run.py "in_progress" "Argo-Workflow" "ML Workflow For SHA $SHA" "Links [Argo Workflow]($ARGO_LINK) | [W&B Project](https://app.wandb.ai/$WANDB_ENTITY/$WANDB_PROJECT) | Docker: [hamelsmu/ml-cicd](https://cloud.docker.com/u/hamelsmu/repository/docker/hamelsmu/ml-cicd), [hamelsmu/ml-cicd-gpu](https://cloud.docker.com/u/hamelsmu/repository/docker/hamelsmu/ml-cicd-gpu)" " "
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         ARGO_LINK: ${{ steps.argo.outputs.WORKFLOW_URL }}
@@ -84,7 +84,7 @@ jobs:
     - name: Comment With Metadata
       if: steps.label.outputs.TRIGGERED == 'true'
       run: |
-        bash action_files/pr_comment.sh "ML Workflow For SHA $SHA has been instantiated:\nLinks: [Argo Workflow]($ARGO_LINK) | [W&B Project](https://app.wandb.ai/$WANDB_ENTITY/$WANDB_PROJECT)\n\nCheck \`Argo-Workflow\` created, will be marked as a success/failure when workflow finishes."
+        bash action_files/pr_comment.sh "ML Workflow For SHA $SHA has been instantiated.\nCheck run \`Argo-Workflow\` created, which will be marked as a success/failure when the [Argo workflow]($ARGO_LINK) finishes."
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         ARGO_LINK: ${{ steps.argo.outputs.WORKFLOW_URL }}
