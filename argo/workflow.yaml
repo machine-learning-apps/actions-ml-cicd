@@ -103,9 +103,19 @@ spec:
       source: |
         import os, requests
         sha = os.getenv('GITHUB_SHA')
-        repo = os.getenv('REPO')
+        owner, repo = os.getenv('REPO').split("/")
         pr_num = os.getenv('PR_NUMBER')
-        print(f'SHA: {sha} REPO: {repo} PR_NUMBER: {pr_num}')
+        personal_access_token = os.getenv('PAT')
+        # build the request
+        url = f'https://api.github.com/repos/{owner}/{repo}/dispatches'
+        headers = {'authorization': f'token {personal_access_token}',
+                   'accept': 'application/vnd.github.everest-preview+json'}
+        payload = {'sha': sha, 'pr_num': pr_num, 'status': 'success'}
+        # stuff a payload into the event_type string
+        data = {'event_type': f'{payload}'}
+        response = requests.post(url=url, headers=headers, json=data)
+        assert response.status_code == 204
+        print(response)
       env:
       - name: GITHUB_SHA
         value: "{{workflow.parameters.GITHUB-SHA}}"
@@ -113,6 +123,11 @@ spec:
         value: "{{workflow.parameters.PR-NUMBER}}"
       - name: REPO
         value: "{{workflow.parameters.REPO}}"
+      - name: PAT
+        valueFrom:
+          secretKeyRef:
+            name: ml-cicd
+            key: PAT
   - name: fail
     script:
       image: python:alpine3.6
