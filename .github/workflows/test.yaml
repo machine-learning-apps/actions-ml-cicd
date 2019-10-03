@@ -5,7 +5,11 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+    - name: Copy Repository Contents
+      uses: actions/checkout@master
+
     - name: see if works
       run: | 
        sudo apt-get install python3-pip python3-setuptools
        pip3 install github3.py jwt requests cryptography
+       cd $GITHUB_WORKSPACE
