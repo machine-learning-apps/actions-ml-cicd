@@ -53,8 +53,11 @@ jobs:
       run: |
         cd $GITHUB_WORKSPACE
         echo "GITHUB-SHA: $SHA" >> argo/params.yaml
+        echo "PR-NUMBER: $PR_NUMBER" >> argo/params.yaml
+        echo "REPO: $GITHUB_REPOSITORY" >> argo/params.yaml
       env:
         SHA: ${{ steps.label.outputs.HEAD_SHA }}
+        PR_NUMBER: ${{ steps.label.outputs.ISSUE_NUMBER }}
           
     - name: Submit Argo Deployment
       if: steps.label.outputs.TRIGGERED == 'true'
