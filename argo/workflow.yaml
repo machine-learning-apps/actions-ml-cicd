@@ -15,6 +15,10 @@ spec:
       value: NOT_SUPPLIED
     - name: WANDB-PROJECT
       value: NOT_SUPPLIED
+    - name: PR-NUMBER
+      value: 0
+    - name: REPO
+      value: NOT_SUPPLIED
 
   templates:
   - name: actions 
@@ -94,15 +98,21 @@ spec:
         when: "{{workflow.status}} != Succeeded"
   - name: success
     script:
-      image: python:alpine3.6
+      image: nyurik/alpine-python3-requests:latest
       command: [python]
       source: |
-        import os
+        import os, requests
         sha = os.getenv('GITHUB_SHA')
-        print(f'{sha}')
+        repo = os.getenv('REPO')
+        pr_num = os.getenv('PR_NUMBER')
+        print(f'SHA: {sha} REPO: {repo} PR_NUMBER: {pr_num}')
       env:
       - name: GITHUB_SHA
         value: "{{workflow.parameters.GITHUB-SHA}}"
+      - name: PR_NUMBER
+        value: "{{workflow.parameters.PR-NUMBER}}"
+      - name: REPO
+        value: "{{workflow.parameters.REPO}}"
   - name: fail
     script:
       image: python:alpine3.6
