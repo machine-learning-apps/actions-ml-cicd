@@ -1,5 +1,5 @@
 {
-  "action": "{'sha': 'test-1234', 'pr_num': '11', 'status': 'success'}",
+  "action": "{'sha': '3137a13b1cadcd7d40bbc7364ef9f6a69f9f1d97', 'pr_num': '11', 'status': 'success'}",
   "branch": "master",
   "client_payload": null,
   "organization": {
@@ -92,7 +92,7 @@
     },
     "private": false,
     "pulls_url": "https://api.github.com/repos/machine-learning-apps/actions-ml-cicd/pulls{/number}",
-    "pushed_at": "2019-10-03T21:26:21Z",
+    "pushed_at": "2019-10-03T22:06:52Z",
     "releases_url": "https://api.github.com/repos/machine-learning-apps/actions-ml-cicd/releases{/id}",
     "size": 116,
     "ssh_url": "git@github.com:machine-learning-apps/actions-ml-cicd.git",

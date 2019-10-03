@@ -110,7 +110,7 @@ spec:
         url = f'https://api.github.com/repos/{owner}/{repo}/dispatches'
         headers = {'authorization': f'token {personal_access_token}',
                    'accept': 'application/vnd.github.everest-preview+json'}
-        payload = {'sha': sha, 'pr_num': pr_num, 'status': 'success'}
+        payload = {'sha': sha, 'pr_num': pr_num, 'conclusion': 'success'}
         # stuff a payload into the event_type string
         data = {'event_type': f'{payload}'}
         response = requests.post(url=url, headers=headers, json=data)
