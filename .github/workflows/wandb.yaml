@@ -1,4 +1,4 @@
-name: wamdb
+name: wandb
 on: push
 
 jobs:
