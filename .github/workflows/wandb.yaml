@@ -15,4 +15,3 @@ jobs:
         DISPLAY_METRICS: "['acc', 'loss', 'val_acc', 'val_loss']"
         WANDB_API_KEY: ${{ secrets.WANDB_API_KEY }}
         DEBUG: 'true'
-
