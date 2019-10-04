@@ -3,7 +3,6 @@ on: repository_dispatch
 
 jobs:
   test:
-    name: see-output
     runs-on: ubuntu-latest
 
     steps:
