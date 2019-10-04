@@ -21,15 +21,12 @@ jobs:
       uses: machine-learning-apps/wandb-action@master
       id: wandb
       with:
-        PROJECT_NAME: '$WANDB_ENTITY/$WANDB_PROJECT'
-        FILTER_GITHUB_SHA: ${{ steps.rd.outputs.SHA }}
+        PROJECT_NAME: ${{ format('{0}/{1}', secrets.WANDB_ENTITY, secrets.WANDB_PROJECT) }}
+        FILTER_GITHUB_SHA: "0c8524ebb794c907446fc97a5fd18f5e4837e242"
         BASELINE_TAGS: "['baseline', 'reference']"
         DISPLAY_METRICS: "['acc', 'loss', 'val_acc', 'val_loss']"
         WANDB_API_KEY: ${{ secrets.WANDB_API_KEY }}
         DEBUG: 'true'
-      env:
-        WANDB_ENTITY: ${{ secrets.WANDB_ENTITY }}
-        WANDB_PROJECT: ${{ secrets.WANDB_PROJECT }}
 
     - name: Upload csv
       if: steps.wandb.outputs.BOOL_COMPLETE == 'true'
