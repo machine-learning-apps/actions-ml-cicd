@@ -8,5 +8,5 @@ jobs:
     steps:
     - name: pip
       run: |
-        apt-get install python3-setuptools
+        sudo apt-get install python3-setuptools
         pip3 install pandas tabulate
