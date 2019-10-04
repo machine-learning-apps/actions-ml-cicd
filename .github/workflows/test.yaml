@@ -1,0 +1,10 @@
+name: pip install
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: pip
+      run: pip3 install pandas tabulate
