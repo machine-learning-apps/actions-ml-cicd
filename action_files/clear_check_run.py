@@ -1,9 +1,11 @@
 import os, json, requests
 
 nwo = os.getenv('GITHUB_REPOSITORY')
+sha = os.getenv('SHA')
 token = os.getenv('GITHUB_TOKEN')
 conclusion = os.getenv('WORKFLOW_CONCLUSION')
 
+assert sha, 'Error: you must supply the environment variable SHA'
 assert conclusion, 'Error: you must supply the environment variable WORKFLOW_CONCLUSION'
 assert token, 'Error: you must supply the environment variable GITHUB_TOKEN'
 
