@@ -1,4 +1,4 @@
-import os, json
+import os, json, requests
 
 fname = os.getenv('GITHUB_EVENT_PATH')
 nwo = os.getenv('GITHUB_REPOSITORY')
