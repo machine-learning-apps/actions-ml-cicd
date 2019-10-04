@@ -7,4 +7,4 @@ jobs:
 
     steps:
     - name: pip
-      run: pip3 install pandas tabulate
+      run: pip3 install setuptools pandas tabulate
