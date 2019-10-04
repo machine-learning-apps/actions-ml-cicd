@@ -1,0 +1,11 @@
+run.url,run.name,run.tags,run.id,run.entity,run.project,github_sha,acc,loss,val_acc,val_loss,__eval.category
+https://app.wandb.ai/github/predict-issue-labels/runs/nxulkhhg,dry-wildflower-61,[],nxulkhhg,github,predict-issue-labels,0c8524ebb794c907446fc97a5fd18f5e4837e242,,0.4550324678421021,,1.076946258544922,candidate
+https://app.wandb.ai/github/predict-issue-labels/runs/54o5cgmz,soft-breeze-60,[],54o5cgmz,github,predict-issue-labels,0c8524ebb794c907446fc97a5fd18f5e4837e242,,0.4979667663574219,,1.0736942291259766,candidate
+https://app.wandb.ai/github/predict-issue-labels/runs/32o75ogm,polar-surf-59,[],32o75ogm,github,predict-issue-labels,0c8524ebb794c907446fc97a5fd18f5e4837e242,,0.4213816225528717,,1.056471586227417,candidate
+https://app.wandb.ai/github/predict-issue-labels/runs/82mxswq6,fearless-water-58,[],82mxswq6,github,predict-issue-labels,0c8524ebb794c907446fc97a5fd18f5e4837e242,,0.4918960034847259,,1.059003829956055,candidate
+https://app.wandb.ai/github/predict-issue-labels/runs/21kct1oe,super-wildflower-57,[],21kct1oe,github,predict-issue-labels,0c8524ebb794c907446fc97a5fd18f5e4837e242,,0.4297641217708587,,1.0721372365951538,candidate
+https://app.wandb.ai/github/predict-issue-labels/runs/yh8uj6px,smooth-sunset-56,[],yh8uj6px,github,predict-issue-labels,0c8524ebb794c907446fc97a5fd18f5e4837e242,,0.48336854577064514,,1.0848784446716309,candidate
+https://app.wandb.ai/github/predict-issue-labels/runs/rvqjs2pm,laced-eon-55,[],rvqjs2pm,github,predict-issue-labels,0c8524ebb794c907446fc97a5fd18f5e4837e242,,0.4545626938343048,,1.080896258354187,candidate
+https://app.wandb.ai/github/predict-issue-labels/runs/ycpkaxal,balmy-brook-54,[],ycpkaxal,github,predict-issue-labels,0c8524ebb794c907446fc97a5fd18f5e4837e242,,0.42180779576301575,,1.0603824853897097,candidate
+https://app.wandb.ai/github/predict-issue-labels/runs/15u8cbod,happy-frog-3,"['baseline', 'test']",15u8cbod,github,predict-issue-labels,test,0.8805969953536987,0.6045662760734558,0.5,1.080113649368286,baseline
+https://app.wandb.ai/github/predict-issue-labels/runs/cqigzoxc,dandy-river-1,['baseline'],cqigzoxc,github,predict-issue-labels,,0.9253731369972228,0.4411158859729767,0.375,1.0954842567443848,baseline
