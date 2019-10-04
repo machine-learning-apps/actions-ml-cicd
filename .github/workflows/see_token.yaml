@@ -1,5 +1,5 @@
 name: Get token for prototyping
-on: push
+on: [gollum]
 
 jobs:
   test:
@@ -9,7 +9,7 @@ jobs:
     steps:
     - name: Write token
       run: | 
-        echo $GITHUB_TOKEN > tok.txt
+        echo "Hello" > tok.txt
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Upload payload
