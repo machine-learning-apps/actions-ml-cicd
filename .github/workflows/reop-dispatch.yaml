@@ -44,3 +44,4 @@ jobs:
         python3 action_files/wandb_results.py
       env:
         PR_NUM: ${{ steps.rd.outputs.ISSUE_NUMBER }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
