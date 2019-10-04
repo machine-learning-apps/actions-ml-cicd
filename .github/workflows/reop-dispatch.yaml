@@ -52,4 +52,5 @@ jobs:
         python3 action_files/clear_check_run.py
       env:
         WORKFLOW_CONCLUSION: ${{ steps.rd.outputs.CONCLUSION }}
+        SHA: ${{ steps.rd.outputs.SHA }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
