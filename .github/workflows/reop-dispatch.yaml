@@ -33,3 +33,14 @@ jobs:
       with:
         name: wandb_report
         path: wandb_report.csv
+
+    - name: process_data
+      if: steps.wandb.outputs.BOOL_COMPLETE == 'true'
+      run: |
+        cd $GITHUB_WORKSPACE
+        sudo apt-get install python3-setuptools
+        pip3 install wheel 
+        pip3 install pandas==0.25.1 tabulate==0.8.5 requests==2.22.0
+        python3 action_files/wandb_results.py
+      env:
+        PR_NUM: ${{ steps.rd.outputs.ISSUE_NUMBER }}
