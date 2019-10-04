@@ -28,14 +28,14 @@ jobs:
         DEBUG: 'true'
 
     - name: Upload csv
-      if: steps.wandb.outputs.BOOL_COMPLETE == 'true'
+      if: steps.wandb.outputs.BOOL_COMPLETE == 'true' && steps.rd.outputs.CONCLUSION == 'success'
       uses: actions/upload-artifact@v1
       with:
         name: wandb_report
         path: wandb_report.csv
 
     - name: process_data
-      if: steps.wandb.outputs.BOOL_COMPLETE == 'true'
+      if: steps.wandb.outputs.BOOL_COMPLETE == 'true' && steps.rd.outputs.CONCLUSION == 'success'
       run: |
         cd $GITHUB_WORKSPACE
         sudo apt-get install python3-setuptools
@@ -44,4 +44,12 @@ jobs:
         python3 action_files/wandb_results.py
       env:
         PR_NUM: ${{ steps.rd.outputs.ISSUE_NUMBER }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: update status of check run
+      run: |
+        cd $GITHUB_WORKSPACE
+        python3 action_files/clear_check_run.py
+      env:
+        WORKFLOW_CONCLUSION: ${{ steps.rd.outputs.CONCLUSION }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

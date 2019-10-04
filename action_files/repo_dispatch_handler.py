@@ -22,22 +22,6 @@ pr_num = payload['pr_num']
 conclusion = payload['conclusion']
 sha = payload['sha']
 
-url = f'https://api.github.com/repos/{nwo}/check-runs'
-headers = {'authorization': f'token {token}',
-           'accept': 'application/vnd.github.antiope-preview+json'}
-
-data = {
-    'name': 'Argo-Workflow',
-    'head_sha': f'{sha}',
-    'conclusion': f'{conclusion}',
-}
-
-response = requests.post(url=url, headers=headers, json=data)
-
-assert response.status_code == 201, f'Error: Check run API returned status code of {response.status_code}'
-
 print(f'::set-output name=SHA::{sha}')
 print(f'::set-output name=ISSUE_NUMBER::{pr_num}')
 print(f'::set-output name=CONCLUSION::{conclusion}')
-
-# https://developer.github.com/v3/issues/labels/#remove-a-label-from-an-issue

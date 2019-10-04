@@ -50,5 +50,5 @@ result = requests.delete(url=url, headers=headers)
 
 # Add Label
 url = f"https://api.github.com/repos/{nwo}/issues/{pr_num}/labels"
-data = {"labels": "Full Test Complete"}
+data = {"labels": ["Full Test Complete"]}
 result = requests.post(url=url, headers=headers, json=data)

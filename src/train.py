@@ -40,8 +40,8 @@ train_bodies, test_bodies, train_titles, test_titles, train_targets, test_target
     test_size=0.25
 )
 
-body_emb_size = 100
-title_emb_size = 100
+body_emb_size = 50
+title_emb_size = 50
 
 num_classes = 3
 
