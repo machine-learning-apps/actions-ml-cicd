@@ -34,6 +34,7 @@ def format_time(val):
     return datetime.fromtimestamp(val).strftime('%H:%M:%S')
 
 # client = Client(os.getenv("DASK_SCHEDULER_ADDRESS"))
+client = Client()
 pbar = tqdm(total=6)
 pbar.set_description(desc="tokenizing", refresh=True)
 
@@ -42,7 +43,7 @@ start_time = time.time()
 output_dir = "/data/"
 
 base_url = 'https://storage.googleapis.com/codenet/issue_labels/'
-df = pd.concat([pd.read_csv(base_url+f'00000000000{i}.csv.gz') for i in range(1)]).head(100)
+df = pd.concat([pd.read_csv(base_url+f'00000000000{i}.csv.gz') for i in range(1)])
 
 # Minimal EDA for logging purposes
 print(f'Shape of data: {df.shape}')
