@@ -4,14 +4,12 @@ on: push
 jobs:
   test:
     runs-on: ubuntu-latest
-
     steps:
-      
     - name: Get Runs Using SHA
       uses: machine-learning-apps/wandb-action@master
       id: wandb
       with:
-        PROJECT_NAME: '$WANDB_ENTITY/$WANDB_PROJECT'
+        PROJECT_NAME: "${WANDB_ENTITY}/${WANDB_PROJECT}"
         FILTER_GITHUB_SHA: "0c8524ebb794c907446fc97a5fd18f5e4837e242"
         BASELINE_TAGS: "['baseline', 'reference']"
         DISPLAY_METRICS: "['acc', 'loss', 'val_acc', 'val_loss']"
