@@ -9,7 +9,7 @@ jobs:
       uses: machine-learning-apps/wandb-action@master
       id: wandb
       with:
-        PROJECT_NAME: ${{ secrets.WANDB_ENTITY/secrets.WANDB_PROJECT }}
+        PROJECT_NAME: ${{ format('{0}/{1}', secrets.WANDB_ENTITY, secrets.WANDB_PROJECT) }}
         FILTER_GITHUB_SHA: "0c8524ebb794c907446fc97a5fd18f5e4837e242"
         BASELINE_TAGS: "['baseline', 'reference']"
         DISPLAY_METRICS: "['acc', 'loss', 'val_acc', 'val_loss']"
