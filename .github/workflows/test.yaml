@@ -9,4 +9,4 @@ jobs:
     - name: pip
       run: |
         sudo apt-get install python3-setuptools
-        pip3 install pandas tabulate
+        pip3 install wheel pandas tabulate
