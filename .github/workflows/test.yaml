@@ -10,4 +10,4 @@ jobs:
       run: |
         sudo apt-get install python3-setuptools
         pip3 install wheel 
-        pip3 install pandas tabulate
+        pip3 install pandas==0.25.1 tabulate==0.8.5
