@@ -1,11 +1,45 @@
-## Resources For Machine Learning CI/CD With GitHub Actions
+# A Collection of GitHub Actions That Facilitate MLOps
 
-Read [this article](https://blog.paperspace.com/ci-cd-for-machine-learning-ai/) for a primer on what CI/CD for Machine Learning is and how it differs from traditional CI/CD .
+## What is MLOps?  
 
-## GitHub Actions That Enable CI/CD For Machine Learning
+Useful resources:
+
+- Paperspace - CI/CD for Machine Learning & AI: [Talk](https://databricks.com/session/ci-cd-for-machine-learning), [Blog](https://blog.paperspace.com/ci-cd-for-machine-learning-ai/)
+- [Hidden Technical Debt in Machine Learning Systems](https://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems.pdf)
+
+
+## Example Of What We Are Trying To Solve With MLOps:
+
+The code-review and deployment process re: Machine Learning often involves making decisions about merging or deploying code where critical information regarding model performance and statistics are not readily available.  This is due to the friction in including logging and statistics from model training runs in Pull Requests.  For example, consider this excerpt from a [real pull-request](https://github.com/kubeflow/code-intelligence/pull/54) concerning a machine learning project:
+
+>![](images/pr.png)
+
+In an ideal world, the participants in the above code review should be provided with all of the context necessary to evaluate the PR, including:
+
+- Model performance metrics and statistics
+- Comparison with baselines and other models on a holdout dataset
+- Verification that the metrics and statistics correspond to the code changed in the PR, by tying the results to a commit SHA.
+- Data versioning
+- etc.
+
+### How We Can Solve This With GitHub Actions:
+
+[GitHub Actions](https://github.com/features/actions) allow you to compose a set of pre-built CI/CD tools or make your own, allowing you to compose a workflow that enables MLOps from GitHub.  The below example composes the following Actions into useful pipeline:
+
+ [ChatOps](https://github.com/marketplace/actions/chatops-via-pr-labels) &rightarrow; [Deploy Argo ML Workflows](https://github.com/machine-learning-apps/gke-argo) &rightarrow;  [Weights & Biases Experiment Tracking](https://github.com/machine-learning-apps/wandb-action):
+
+>![](images/mlops.png)
+
+View the demo pull request [here](https://github.com/machine-learning-apps/actions-ml-cicd/pull/23).  What is shown above is only the tip of the iceberg!  Keep reading for links to more Actions. 
+
+# A Collection Of GitHub Actions That Enable MLOps and CI/CD For Machine Learning:
+
+Below is a collection of GitHub Actions that we are curating or building that facilitate machine learning workflows:
 
 ### 1. ChatOps
    - [Action: ChatOps From Pull Requests](https://github.com/marketplace/actions/chatops-for-actions): Listens to ChatOps commands in PRs and emits variables that downstream Actions can branch on.
+
+   - [Action: ChatOps From Pull Requests w/GitHub App](https://github.com/marketplace/actions/chatops-via-pr-labels) - this is alternative to the above action that which authenticates as a seperate GitHub App and adds a label you specify to your pull request.  The benefits of this are two-fold:  (1) Unlike a PR-Comment which triggers Actions workflows [on the default branch](https://help.github.com/en/articles/events-that-trigger-workflows#issue-comment-event-issue_comment), the label event will trigger Actions to run on the branch of the PR.  (2) This can prevent you from accidentally executing the chatops command twice as the label event will not fire if the PR is already labeled. 
 
 ### 2. Submitting Argo workflows
 [Argo](https://argoproj.github.io/) allows you to orechestrate machine learning pipelines that run on Kubernetes.
@@ -19,8 +53,3 @@ Read [this article](https://blog.paperspace.com/ci-cd-for-machine-learning-ai/) 
 ### 4. Publish Docker Images
   - [Action: Publish Container To The GitHub Package Registry](https://github.com/marketplace/actions/publish-docker-images-to-gpr).  See this [doc](https://github.com/features/package-registry) on more information on the GitHub Package Registry
   - [Action: Publish Container To a Generic Registry](https://github.com/marketplace/actions/publish-docker)
-
-
-## Demonstrations of ML CI/CD
-
- - TODO
