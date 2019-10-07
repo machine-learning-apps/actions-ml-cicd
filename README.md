@@ -1,6 +1,6 @@
 # A Collection of GitHub Actions That Facilitate MLOps
 
-## What is MLOps?  
+## What is MLOps?
 
 Useful resources:
 
