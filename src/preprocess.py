@@ -44,7 +44,7 @@ start_time = time.time()
 output_dir = "/data/"
 
 base_url = 'https://storage.googleapis.com/codenet/issue_labels/'
-df = pd.concat([pd.read_csv(base_url+f'00000000000{i}.csv.gz') for i in range(3)])
+df = pd.concat([pd.read_csv(base_url+f'00000000000{i}.csv.gz') for i in range(4)])
 
 # Minimal EDA for logging purposes
 print(f'Shape of data: {df.shape}')
