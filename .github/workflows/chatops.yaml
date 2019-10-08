@@ -2,8 +2,8 @@ name: ChatOps
 on: [issue_comment]
 
 jobs:
-  label-pr:
-    if: github.event.issue.pull_request != null
+  full-test-run:
+    if: github.event.issue.pull_request != null &&  contains(github.event.comment.body, '/run-full-test')
     runs-on: ubuntu-latest
     steps:
       - uses: machine-learning-apps/actions-chatops@master
@@ -14,3 +14,33 @@ jobs:
           INDICATOR_LABEL: "Full Test Pending"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  deploy:
+    if: github.event.issue.pull_request != null &&  contains(github.event.comment.body, '/deploy')
+    runs-on: ubuntu-latest
+    steps:
+
+      - uses: machine-learning-apps/actions-chatops@master
+        id: deploy_chatops
+        with:
+          TRIGGER_PHRASE: "/deploy"
+          INDICATOR_LABEL: "Full Test Pending"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: validate deploy argument
+        uses: machine-learning-apps/wandb-action@master
+        if: steps.deploy_chatops.outputs.TRIGGERED == 'true'
+        id: wandb
+        with:
+          PROJECT_NAME: ${{ format('{0}/{1}', secrets.WANDB_ENTITY, secrets.WANDB_PROJECT) }}
+          WANDB_API_KEY: ${{ secrets.WANDB_API_KEY }}
+          RUN_ID: ${{ steps.deploy_chatops.outputs.TRAILING_TOKEN }}
+          DEBUG: 'true'
+        
+      - name: create deployment
+        if: steps.wandb.outputs.BOOL_SINGLE_RUN
+        run: echo "triggered"
+        with:
+          RUN_ID: ${{ steps.deploy_chatops.outputs.TRAILING_TOKEN }}
+
+      
