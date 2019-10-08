@@ -3,11 +3,14 @@ on: [issue_comment]
 
 jobs:
   label-pr:
+    if: github.event.issue.pull_request != null
     runs-on: ubuntu-latest
     steps:
-      - uses: machine-learning-apps/actions-chatops-workaround@master
+      - uses: machine-learning-apps/actions-chatops@master
         with:
           APP_PEM: ${{ secrets.APP_PEM }}
           APP_ID: ${{ secrets.APP_ID }}
           TRIGGER_PHRASE: "/run-full-test"
           INDICATOR_LABEL: "Full Test Pending"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

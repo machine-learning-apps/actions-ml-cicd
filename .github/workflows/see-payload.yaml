@@ -1,5 +1,5 @@
 name: see-payload
-on: [gollum]
+on: issue_comment
 
 jobs:
 
