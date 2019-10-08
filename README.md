@@ -37,9 +37,8 @@ View the demo pull request [here](https://github.com/machine-learning-apps/actio
 Below is a collection of GitHub Actions that we are curating or building that facilitate machine learning workflows:
 
 ### 1. ChatOps
-   - [Action: ChatOps From Pull Requests](https://github.com/marketplace/actions/chatops-for-actions): Listens to ChatOps commands in PRs and emits variables that downstream Actions can branch on.
+   - [Action: ChatOps From Pull Requests](https://github.com/marketplace/actions/chatops-for-actions-in-pull-requests): Listens to ChatOps commands in PRs and emits variables that downstream Actions can branch on.
 
-   - [Action: ChatOps From Pull Requests w/GitHub App](https://github.com/marketplace/actions/chatops-via-pr-labels) - this is alternative to the above action that which authenticates as a seperate GitHub App and adds a label you specify to your pull request.  The benefits of this are two-fold:  (1) Unlike a PR-Comment which triggers Actions workflows [on the default branch](https://help.github.com/en/articles/events-that-trigger-workflows#issue-comment-event-issue_comment), the label event will trigger Actions to run on the branch of the PR.  (2) This can prevent you from accidentally executing the chatops command twice as the label event will not fire if the PR is already labeled. 
 
 ### 2. Submitting Argo workflows
 [Argo](https://argoproj.github.io/) allows you to orechestrate machine learning pipelines that run on Kubernetes.
