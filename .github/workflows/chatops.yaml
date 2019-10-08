@@ -37,7 +37,10 @@ jobs:
           WANDB_API_KEY: ${{ secrets.WANDB_API_KEY }}
           RUN_ID: ${{ steps.deploy_chatops.outputs.TRAILING_TOKEN }}
           DEBUG: 'true'
-        
+
+      - name: Copy Repository Contents
+        uses: actions/checkout@master
+
       - name: create deployment
         if: steps.wandb.outputs.BOOL_SINGLE_RUN
         run: |
