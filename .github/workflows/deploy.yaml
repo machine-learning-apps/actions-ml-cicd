@@ -12,7 +12,7 @@ jobs:
         PROJECT_ID: ${{ secrets.GOOGLE_PROJECT_ID }}
         APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
       with:
-        args: functions deploy predict --runtime python37 --trigger-http --set-env-vars WANDB_API_KEY=${{ secrets.WANDB_API_KEY }},WANDB_ENTITY=${{ secrets.WANDB_ENTITY }},WANDB_PROJECT=${{ secrets.WANDB_PROJECT }},WANDB_RUN_ID=${{ github.event.deployment.payload.wandb_run_id }}
+        args: functions deploy predict --runtime python37 --trigger-http --source=$GITHUB_WORKSPACE/src/deploy --set-env-vars WANDB_API_KEY=${{ secrets.WANDB_API_KEY }},WANDB_ENTITY=${{ secrets.WANDB_ENTITY }},WANDB_PROJECT=${{ secrets.WANDB_PROJECT }},WANDB_RUN_ID=${{ github.event.deployment.payload.wandb_run_id }}
     - run: |
         curl -d '{"state": "failure"}' -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/"$GITHUB_REPOSITORY"/deployments/"$DEPLOYMENT_ID"/statuses
       if: failure()
