@@ -23,7 +23,6 @@ jobs:
         id: deploy_chatops
         with:
           TRIGGER_PHRASE: "/deploy"
-          INDICATOR_LABEL: "Full Test Pending"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
