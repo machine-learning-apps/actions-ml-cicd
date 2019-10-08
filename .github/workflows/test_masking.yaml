@@ -1,0 +1,11 @@
+name: test_masking
+on: [push]
+
+jobs:
+
+  test-masking:
+    runs-on: ubuntu-latest
+    steps:
+    - run: |
+        echo "::add-mask::Hamel"
+        echo "Hamel"
