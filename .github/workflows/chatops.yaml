@@ -40,7 +40,7 @@ jobs:
       - name: create deployment
         if: steps.wandb.outputs.BOOL_SINGLE_RUN
         run: echo "triggered"
-        with:
+        env:
           RUN_ID: ${{ steps.deploy_chatops.outputs.TRAILING_TOKEN }}
 
       
