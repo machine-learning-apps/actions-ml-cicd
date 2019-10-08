@@ -30,7 +30,7 @@ jobs:
 
       - name: validate deploy argument
         uses: machine-learning-apps/wandb-action@master
-        if: steps.deploy_chatops.outputs.TRIGGERED == 'true'
+        if: steps.deploy_chatops.outputs.BOOL_TRIGGERED == 'true'
         id: wandb
         with:
           PROJECT_NAME: ${{ format('{0}/{1}', secrets.WANDB_ENTITY, secrets.WANDB_PROJECT) }}
