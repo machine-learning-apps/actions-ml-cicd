@@ -20,8 +20,10 @@ jobs:
         GITHUB_TOKEN: ${{ github.token }}
         DEPLOYMENT_ID: ${{ github.event.deployment.id }}
     - run: |
-        curl -d '{"state": "success"}' -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/"$GITHUB_REPOSITORY"/deployments/"$DEPLOYMENT_ID"/statuses
+        curl -d "{\"state\": \"success\", \"description\":\"Deployed run id: $WANDB_RUN_ID\", \"log_url\": \"https://console.cloud.google.com/functions/details/us-central1/predict?project=$GOOGLE_PROJECT_ID\"}" -H "Authorization: token $GITHUB_TOKEN" -H "Accept: application/vnd.github.ant-man-preview+json" https://api.github.com/repos/"$GITHUB_REPOSITORY"/deployments/"$DEPLOYMENT_ID"/statuses
       if: success()
       env:
         GITHUB_TOKEN: ${{ github.token }}
         DEPLOYMENT_ID: ${{ github.event.deployment.id }}
+        PROJECT_ID: ${{ secrets.GOOGLE_PROJECT_ID }}
+        WANDB_RUN_ID: ${{ github.event.deployment.payload.wandb_run_id }}
