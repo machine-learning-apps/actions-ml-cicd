@@ -22,6 +22,8 @@ jobs:
       - uses: machine-learning-apps/actions-chatops@master
         id: deploy_chatops
         with:
+          APP_PEM: ${{ secrets.APP_PEM }}
+          APP_ID: ${{ secrets.APP_ID }}
           TRIGGER_PHRASE: "/deploy"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -38,8 +40,11 @@ jobs:
         
       - name: create deployment
         if: steps.wandb.outputs.BOOL_SINGLE_RUN
-        run: echo "triggered"
+        run: |
+          curl -d '{"ref": "$BRANCH_NAME", "payload": {"run_id": "$RUN_ID"}}' -H "Authorization: token $TOKEN" https://api.github.com/repos/$GITHUB_REPOSITORY/deployments
         env:
           RUN_ID: ${{ steps.deploy_chatops.outputs.TRAILING_TOKEN }}
+          BRANCH_NAME: ${{ steps.deploy_chatops.outputs.BRANCH_NAME }}
+          TOKEN: ${{ steps.deploy_chatops.outputs.APP_INSTALLATION_TOKEN }}
 
       
