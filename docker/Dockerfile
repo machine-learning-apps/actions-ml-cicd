@@ -1,23 +1,12 @@
 FROM python:3.7
 
-RUN pip install dask[dataframe] --upgrade
-RUN pip install ktext \
+RUN pip install \
      numpy \
      pandas \ 
-     scikit-learn \
      dill \
+     h5py \
      ktext \ 
-     tensorflow \
-     tqdm \
-     distributed \
-     dask-ml \
-     ipython \
-     jupyterlab \
      wandb
-
-RUN apt-get update && apt-get install htop -y
-RUN apt-get install openssh-server -y
-RUN apt-get install vim -y
 
 # mounting to this folder
 RUN mkdir /data
