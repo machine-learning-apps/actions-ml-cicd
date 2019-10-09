@@ -45,7 +45,7 @@ assert train_body_vecs.shape[0] == train_title_vecs.shape[0] == train_labels.sha
 assert test_body_vecs.shape[0] == test_title_vecs.shape[0] == test_labels.shape[0]
 assert num_classes == 3
 
-f = h5py.File('data/dataset.hdf5', 'w')
+f = h5py.File('/data/dataset.hdf5', 'w')
 f.create_dataset('/titles', data=train_title_vecs)
 f.create_dataset('/bodies', data=train_body_vecs)
 f.create_dataset('/targets', data=train_labels)
@@ -56,7 +56,7 @@ f.create_dataset('/test_targets', data=test_labels)
 f.close()
 
 
-with open("data/metadata.json", "w") as f:
+with open("/data/metadata.json", "w") as f:
     meta = {
         'body_vocab_size': body_pp.n_tokens,
         'title_vocab_size': title_pp.n_tokens,
@@ -69,8 +69,8 @@ with open("data/metadata.json", "w") as f:
 print(f'Metadata:\n {meta}')
 
 # Save the preprocessor
-with open('data/body_pp.dpkl', 'wb') as f:
+with open('/data/body_pp.dpkl', 'wb') as f:
     dpickle.dump(body_pp, f)
 
-with open('data/title_pp.dpkl', 'wb') as f:
+with open('/data/title_pp.dpkl', 'wb') as f:
     dpickle.dump(title_pp, f)
