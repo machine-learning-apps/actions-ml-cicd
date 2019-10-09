@@ -3,6 +3,7 @@ on: repository_dispatch
 
 jobs:
   test:
+    if: github.actor == 'pr-chatops[bot]'
     runs-on: ubuntu-latest
 
     steps:

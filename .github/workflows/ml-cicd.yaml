@@ -6,6 +6,7 @@ on:
 jobs:
 
   ml-workflow:
+    if: github.actor == 'pr-chatops[bot]'
     runs-on: ubuntu-latest
     steps:
 
