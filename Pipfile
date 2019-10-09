@@ -6,8 +6,13 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-dask = "*"
-wandb = "*"
+ktext = "*"
+dill = "*"
+sklearn = "*"
+ipython = "*"
+jupyter = "*"
+ipykernel = "*"
+pandas = "*"
 
 [requires]
 python_version = "3.7"
