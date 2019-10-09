@@ -13,6 +13,7 @@ ipython = "*"
 jupyter = "*"
 ipykernel = "*"
 pandas = "*"
+h5py = "*"
 
 [requires]
 python_version = "3.7"
