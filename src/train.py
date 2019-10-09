@@ -84,8 +84,11 @@ history = model.fit(x=[train_body_vecs, train_title_vecs],
                     callbacks=[csv_logger, model_checkpoint,  WandbCallback()])
 
 
+history_df = pd.DataFrame(history.history)
+print(history_df)
+
 best_val_loss = pd.DataFrame(history.history).val_loss.min()
-best_val_acc = pd.DataFrame(history.history).val_accuracy.max()
+best_val_acc = pd.DataFrame(history.history).val_acc.max()
 wandb.log({'best_val_loss': best_val_loss})
 wandb.log({'best_val_acc':best_val_acc})
 
