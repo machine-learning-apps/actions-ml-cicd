@@ -23,5 +23,5 @@ if response.status_code == 202:
     response = requests.post(url=url, headers=headers, json=data)
     assert response, f"Error: attempt to create deployment failed, received {response.status_code}"
 
-print('Successfully created deployment for run_id: {run_id}')
+print(f'Successfully created deployment for run_id: {run_id}')
 print(response.content)
