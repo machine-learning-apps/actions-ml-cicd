@@ -44,6 +44,7 @@ jobs:
       - name: create deployment
         if: steps.wandb.outputs.BOOL_SINGLE_RUN
         run: |
+          cd $GITHUB_WORKSPACE
           pip3 install requests
           python3 action_files/create_deployment.py
           # curl -d "{\"ref\": \"$BRANCH_NAME\", \"payload\": {\"wandb_run_id\": \"$RUN_ID\"}}" -H "Authorization: token $TOKEN" https://api.github.com/repos/$GITHUB_REPOSITORY/deployments
