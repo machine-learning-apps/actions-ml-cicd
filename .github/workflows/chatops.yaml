@@ -3,7 +3,7 @@ on: [issue_comment]
 
 jobs:
   full-test-run:
-    if: github.event.issue.pull_request != null &&  contains(github.event.comment.body, '/run-full-test')
+    if: github.event.issue.pull_request != null &&  contains(github.event.comment.body, '/run-full-test') && (github.actor == 'hamelsmu' || github.actor == 'hohsiangwu'  || github.actor == 'inc0')
     runs-on: ubuntu-latest
     steps:
       - uses: machine-learning-apps/actions-chatops@master
@@ -15,7 +15,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   deploy:
-    if: github.event.issue.pull_request != null &&  contains(github.event.comment.body, '/deploy')
+    if: github.event.issue.pull_request != null &&  contains(github.event.comment.body, '/deploy') && (github.actor == 'hamelsmu' || github.actor == 'hohsiangwu'  || github.actor == 'inc0')
     runs-on: ubuntu-latest
     steps:
 
@@ -37,11 +37,16 @@ jobs:
           WANDB_API_KEY: ${{ secrets.WANDB_API_KEY }}
           RUN_ID: ${{ steps.deploy_chatops.outputs.TRAILING_TOKEN }}
           DEBUG: 'true'
-        
+
+      - name: Copy Repository Contents
+        uses: actions/checkout@master
+
       - name: create deployment
         if: steps.wandb.outputs.BOOL_SINGLE_RUN
         run: |
-          curl -d "{\"ref\": \"$BRANCH_NAME\", \"payload\": {\"wandb_run_id\": \"$RUN_ID\"}}" -H "Authorization: token $TOKEN" https://api.github.com/repos/$GITHUB_REPOSITORY/deployments
+          pip3 install requests
+          python3 action_files/create_deployment.py
+          # curl -d "{\"ref\": \"$BRANCH_NAME\", \"payload\": {\"wandb_run_id\": \"$RUN_ID\"}}" -H "Authorization: token $TOKEN" https://api.github.com/repos/$GITHUB_REPOSITORY/deployments
         env:
           RUN_ID: ${{ steps.deploy_chatops.outputs.TRAILING_TOKEN }}
           BRANCH_NAME: ${{ steps.deploy_chatops.outputs.BRANCH_NAME }}
