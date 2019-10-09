@@ -3,7 +3,7 @@ on: [issue_comment]
 
 jobs:
   full-test-run:
-    if: github.event.issue.pull_request != null &&  contains(github.event.comment.body, '/run-full-test')
+    if: github.event.issue.pull_request != null &&  contains(github.event.comment.body, '/run-full-test') && contains(['hamelsmu', 'hohsiangwu', 'neovintage', 'inc0', 'jlewi'], github.actor)
     runs-on: ubuntu-latest
     steps:
       - uses: machine-learning-apps/actions-chatops@master
@@ -15,7 +15,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   deploy:
-    if: github.event.issue.pull_request != null &&  contains(github.event.comment.body, '/deploy')
+    if: github.event.issue.pull_request != null &&  contains(github.event.comment.body, '/deploy') && contains(['hamelsmu', 'hohsiangwu', 'neovintage', 'inc0', 'jlewi'], github.actor)
     runs-on: ubuntu-latest
     steps:
 

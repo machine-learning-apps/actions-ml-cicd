@@ -9,6 +9,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+    - name: see actor
+      run: echo $ACTOR
+      env:
+        ACTOR: ${{ github.actor }}
+
     - name: Copy Repository Contents
       uses: actions/checkout@master
 
