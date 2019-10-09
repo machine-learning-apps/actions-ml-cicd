@@ -2,8 +2,8 @@ name: Receive Repository Dispatch Payload
 on: repository_dispatch
 
 jobs:
-  test:
-    if: github.actor == 'pr-chatops[bot]'
+  process-repository-dispatch:
+    if: github.actor == 'pr-chatops[bot]' || github.actor == 'hamelsmu' || github.actor == 'hohsiangwu'
     runs-on: ubuntu-latest
 
     steps:
