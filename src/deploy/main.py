@@ -66,10 +66,6 @@ class IssueLabeler:
 
 # Build the Issue Labeler In The Global Scope
 #############################################
-global model
-global title_pp
-global body_pp
-
 api = wandb.Api()
 run = api.run('{}/{}/{}'.format(os.getenv('WANDB_ENTITY'),
                                 os.getenv('WANDB_PROJECT'),
