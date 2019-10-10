@@ -51,8 +51,8 @@ epochs = 4
 body_input = Input(shape=(meta['issue_body_doc_length'],), name='Body-Input')
 title_input = Input(shape=(meta['issue_title_doc_length'],), name='Title-Input')
 
-body = Embedding(meta['body_vocab_size'], body_emb_size, name='Body-Embedding')(body_input)
-title = Embedding(meta['title_vocab_size'], title_emb_size, name='Title-Embedding')(title_input)
+body = Embedding(meta['body_vocab_size']+1, body_emb_size, name='Body-Embedding')(body_input)
+title = Embedding(meta['title_vocab_size']+1, title_emb_size, name='Title-Embedding')(title_input)
 
 body = BatchNormalization()(body)
 body = GRU(100, name='Body-Encoder')(body)
