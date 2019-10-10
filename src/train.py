@@ -13,6 +13,8 @@ from tensorflow.keras.callbacks import CSVLogger, ModelCheckpoint
 import wandb
 from wandb.keras import WandbCallback
 
+pd.set_option('display.max_columns', 10)
+
 github_sha = os.getenv('GITHUB_SHA')
 entity = os.getenv('WANDB_ENTITY')
 project = os.getenv('WANDB_PROJECT')
