@@ -1,4 +1,4 @@
-name: test speed
+name: test_speed
 on: push
 
 jobs:
