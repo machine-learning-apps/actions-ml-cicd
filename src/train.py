@@ -7,7 +7,7 @@ import pandas as pd
 import tensorflow as tf
 from tensorflow.keras.utils import multi_gpu_model
 from tensorflow.keras.models import Model
-from tensorflow.keras.layers import Input, GRU, Dense, Embedding, Conv1D, Bidirectional, BatchNormalization, Dot, Flatten, Concatenate
+from tensorflow.keras.layers import Input, GRU, Dense, Embedding, Bidirectional, BatchNormalization, Concatenate
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.callbacks import CSVLogger, ModelCheckpoint
 import wandb
@@ -85,7 +85,7 @@ history = model.fit(x=[train_body_vecs, train_title_vecs],
 
 
 history_df = pd.DataFrame(history.history)
-print(history_df)
+print(history_df.round(2))
 
 best_val_loss = pd.DataFrame(history.history).val_loss.min()
 best_val_acc = pd.DataFrame(history.history).val_acc.max()
