@@ -5,7 +5,6 @@ import dill as dpickle
 import json
 import sys
 
-issue_labeler = None
 
 class IssueLabeler:
     def __init__(self, 
@@ -64,34 +63,33 @@ class IssueLabeler:
         
         return {k:v for k,v in zip(self.class_names, probs)}
 
+# Build the Issue Labeler In The Global Scope
+#############################################
+api = wandb.Api()
+run = api.run('{}/{}/{}'.format(os.getenv('WANDB_ENTITY'), os.getenv('WANDB_PROJECT'), os.getenv('WANDB_RUN_ID')))
+
+# Fetch and load best model for run id
+run.file('model-best.h5').download(replace=True, root='/tmp')
+model = tf.keras.models.load_model('/tmp/model-best.h5')
+
+# Download data pre-processing artifacts
+run.file('title_pp.dpkl').download(replace=True, root='/tmp')
+run.file('body_pp.dpkl').download(replace=True, root='/tmp')
+
+# Load data pre-processing artifacts into memory
+with open('/tmp/title_pp.dpkl', 'rb') as f:
+    title_pp = dpickle.load(f)
+
+with open('/tmp/body_pp.dpkl', 'rb') as f:
+    body_pp = dpickle.load(f)
+
+# instantiate the IssueLabeler object
+issue_labeler = IssueLabeler(body_text_preprocessor=body_pp,
+                             title_text_preprocessor=title_pp,
+                             model=model)
+
 
 def predict(request):
-    global issue_labeler
-    if not issue_labeler:
-        # Authenticate to wandb experiment tracking system
-        api = wandb.Api()
-        run = api.run('{}/{}/{}'.format(os.getenv('WANDB_ENTITY'), os.getenv('WANDB_PROJECT'), os.getenv('WANDB_RUN_ID')))
-        
-        # Fetch and load best model for run id
-        run.file('model-best.h5').download(replace=True, root='/tmp')
-        model = tf.keras.models.load_model('/tmp/model-best.h5')
-
-        # Download data pre-processing artifacts
-        run.file('title_pp.dpkl').download(replace=True, root='/tmp')
-        run.file('body_pp.dpkl').download(replace=True, root='/tmp')
-
-        # Load data pre-processing artifacts into memory
-        with open('/tmp/title_pp.dpkl', 'rb') as f:
-            title_pp = dpickle.load(f)
-
-        with open('/tmp/body_pp.dpkl', 'rb') as f:
-            body_pp = dpickle.load(f)
-
-        # instantiate the IssueLabeler object
-        issue_labeler = IssueLabeler(body_text_preprocessor=body_pp,
-                                     title_text_preprocessor=title_pp,
-                                     model=model)
-
     request_json = request.get_json(silent=True)
     if 'body' not in request_json or 'title' not in request_json:
         return "Error: Request must contain the fields `body` and `title`"
