@@ -1,0 +1,15 @@
+name: Demo
+on: push
+
+jobs:
+  see_speed:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: machine-learning-apps/actions-chatops@master
+        with:
+          APP_PEM: ${{ secrets.APP_PEM }}
+          APP_ID: ${{ secrets.APP_ID }}
+          TRIGGER_PHRASE: "/test-trigger-comment"
+          INDICATOR_LABEL: "test-label"
+        env: # you must supply GITHUB_TOKEN
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
