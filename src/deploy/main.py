@@ -92,16 +92,16 @@ def predict(request):
                                      title_text_preprocessor=title_pp,
                                      model=model)
 
-        request_json = request.get_json(silent=True)
-        if 'body' not in request_json or 'title' not in request_json:
-            return "Error: Request must contain the fields `body` and `title`"
-        body = request_json['body']
-        title = request_json['title']
+    request_json = request.get_json(silent=True)
+    if 'body' not in request_json or 'title' not in request_json:
+        return "Error: Request must contain the fields `body` and `title`"
+    body = request_json['body']
+    title = request_json['title']
 
-        try:
-            predictions = issue_labeler.get_probabilities(body=f"{body}", 
-                                                      title=f"{title}")
-        except:
-           return f"Error making prediction: {sys.exc_info()[0]}" 
+    try:
+        predictions = issue_labeler.get_probabilities(body=f"{body}", 
+                                                    title=f"{title}")
+    except:
+        return f"Error making prediction: {sys.exc_info()[0]}" 
 
     return json.dumps(predictions)
