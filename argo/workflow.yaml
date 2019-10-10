@@ -148,3 +148,15 @@ spec:
         response = requests.post(url=url, headers=headers, json=data)
         assert response.status_code == 204
         print(response)
+      env:
+      - name: GITHUB_SHA
+        value: "{{workflow.parameters.GITHUB-SHA}}"
+      - name: PR_NUMBER
+        value: "{{workflow.parameters.PR-NUMBER}}"
+      - name: REPO
+        value: "{{workflow.parameters.REPO}}"
+      - name: PAT
+        valueFrom:
+          secretKeyRef:
+            name: ml-cicd
+            key: PAT
