@@ -2,6 +2,8 @@ import os
 import tensorflow as tf
 import wandb
 import dill as dpickle
+import json
+import sys
 
 issue_labeler = None
 
@@ -90,11 +92,16 @@ def predict(request):
                                      title_text_preprocessor=title_pp,
                                      model=model)
 
-        # TODO: get variables body and title from request
-        # body =
-        # title =
-        predictions = issue_labeler.get_probabilities(body=f"{body}", 
+        request_json = request.get_json(silent=True)
+        if 'body' not in request_json or 'title' not in request_json:
+            return "Error: Request must contain the fields `body` and `title`"
+        body = request_json['body']
+        title = request_json['title']
+
+        try:
+            predictions = issue_labeler.get_probabilities(body=f"{body}", 
                                                       title=f"{title}")
-        
-    # TODO: return prediction instead of the request
-    return request.to_json()
+        except:
+           return f"Error making prediction: {sys.exc_info()[0]}" 
+
+    return json.dumps(predictions)
