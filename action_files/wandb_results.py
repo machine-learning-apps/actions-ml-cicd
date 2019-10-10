@@ -20,7 +20,7 @@ def reformat_df(df):
     # add links to run id
     df['Run ID'] = df.apply(lambda x: "["+x['run.id']+"]("+x['run.url'] +")", axis=1)
     # select columns
-    clean_df = df[['__eval.category', 'Run ID', 'github_sha', 'loss', 'val_loss', 'accuracy', 'val_accuracy', '_runtime']].round(3)
+    clean_df = df[['__eval.category', 'Run ID', 'github_sha', 'loss', 'best_val_loss', 'accuracy', 'best_val_acc', '_runtime']].round(3)
     # rename columns
     clean_df.columns=['Category', 'Run ID', 'SHA', 'Train Loss', 'Val Loss', 'Acc', 'Val Acc', 'Runtime']
     # emphasize candidate runs
