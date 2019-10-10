@@ -130,7 +130,7 @@ spec:
             key: PAT
   - name: fail
     script:
-      image: python:alpine3.6
+      image: nyurik/alpine-python3-requests:latest
       command: [python]
       source: |
         import os, requests
