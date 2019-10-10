@@ -9,6 +9,9 @@ import json
 df = pd.concat([pd.read_csv(f'https://storage.googleapis.com/codenet/issue_labels/00000000000{i}.csv.gz')
                 for i in range(1)])
 
+print('class name to integer check:')
+print(df[['class_int', 'c_bug', 'c_feature', 'c_question']].groupby('class_int').max())
+
 #split data into train/test
 traindf, testdf = train_test_split(df, test_size=.15, random_state=0)
 # Clean, tokenize, and apply padding / truncating such that each document length = 75th percentile for the dataset.
