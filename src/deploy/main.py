@@ -3,7 +3,7 @@ import tensorflow as tf
 import wandb
 import dill as dpickle
 
-model = None
+issue_labeler = None
 
 class IssueLabeler:
     def __init__(self, 
@@ -64,8 +64,8 @@ class IssueLabeler:
 
 
 def predict(request):
-    global model
-    if not model:
+    global issue_labeler
+    if not issue_labeler:
         # Authenticate to wandb experiment tracking system
         api = wandb.Api()
         run = api.run('{}/{}/{}'.format(os.getenv('WANDB_ENTITY'), os.getenv('WANDB_PROJECT'), os.getenv('WANDB_RUN_ID')))
