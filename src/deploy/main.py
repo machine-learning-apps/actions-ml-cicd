@@ -1,9 +1,10 @@
+import json
 import os
+import sys
+
+import dill as dpickle
 import tensorflow as tf
 import wandb
-import dill as dpickle
-import json
-import sys
 
 
 class IssueLabeler:
@@ -54,23 +55,26 @@ class IssueLabeler:
          'feature': 0.6401631832122803,
          'question': 0.2761166989803314}
         """
-        #transform raw text into array of ints
+        # transform raw text into array of ints
         vec_body = self.body_pp.transform([body])
         vec_title = self.title_pp.transform([title])
         
         # get predictions
         probs = self.model.predict(x=[vec_body, vec_title]).tolist()[0]
         
-        return {k:v for k,v in zip(self.class_names, probs)}
+        return {k:v for k, v in zip(self.class_names, probs)}
 
 # Build the Issue Labeler In The Global Scope
 #############################################
 api = wandb.Api()
-run = api.run('{}/{}/{}'.format(os.getenv('WANDB_ENTITY'), os.getenv('WANDB_PROJECT'), os.getenv('WANDB_RUN_ID')))
+run = api.run('{}/{}/{}'.format(os.getenv('WANDB_ENTITY'),
+                                os.getenv('WANDB_PROJECT'),
+                                os.getenv('WANDB_RUN_ID')))
 
 # Fetch and load best model for run id
 run.file('model-best.h5').download(replace=True, root='/tmp')
 model = tf.keras.models.load_model('/tmp/model-best.h5')
+global model
 
 # Download data pre-processing artifacts
 run.file('title_pp.dpkl').download(replace=True, root='/tmp')
@@ -82,6 +86,9 @@ with open('/tmp/title_pp.dpkl', 'rb') as f:
 
 with open('/tmp/body_pp.dpkl', 'rb') as f:
     body_pp = dpickle.load(f)
+
+global title_pp
+global body_pp
 
 # instantiate the IssueLabeler object
 issue_labeler = IssueLabeler(body_text_preprocessor=body_pp,
@@ -98,8 +105,8 @@ def predict(request):
 
     try:
         predictions = issue_labeler.get_probabilities(body=f"{body}", 
-                                                    title=f"{title}")
+                                                      title=f"{title}")
     except:
-        return f"Error making prediction: {sys.exc_info()[0]}" 
+        return f"Error making prediction: {sys.exc_info()[0]}"
 
     return json.dumps(predictions)
