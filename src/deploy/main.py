@@ -66,6 +66,10 @@ class IssueLabeler:
 
 # Build the Issue Labeler In The Global Scope
 #############################################
+global model
+global title_pp
+global body_pp
+
 api = wandb.Api()
 run = api.run('{}/{}/{}'.format(os.getenv('WANDB_ENTITY'),
                                 os.getenv('WANDB_PROJECT'),
@@ -74,7 +78,6 @@ run = api.run('{}/{}/{}'.format(os.getenv('WANDB_ENTITY'),
 # Fetch and load best model for run id
 run.file('model-best.h5').download(replace=True, root='/tmp')
 model = tf.keras.models.load_model('/tmp/model-best.h5')
-global model
 
 # Download data pre-processing artifacts
 run.file('title_pp.dpkl').download(replace=True, root='/tmp')
@@ -86,9 +89,6 @@ with open('/tmp/title_pp.dpkl', 'rb') as f:
 
 with open('/tmp/body_pp.dpkl', 'rb') as f:
     body_pp = dpickle.load(f)
-
-global title_pp
-global body_pp
 
 # instantiate the IssueLabeler object
 issue_labeler = IssueLabeler(body_text_preprocessor=body_pp,
