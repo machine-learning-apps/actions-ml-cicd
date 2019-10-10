@@ -88,7 +88,7 @@ history_df = pd.DataFrame(history.history)
 print(history_df.round(2))
 
 best_val_loss = pd.DataFrame(history.history).val_loss.min()
-best_val_acc = pd.DataFrame(history.history).val_acc.max()
+best_val_acc = pd.DataFrame(history.history).val_accuracy.max()
 wandb.log({'best_val_loss': best_val_loss})
 wandb.log({'best_val_acc':best_val_acc})
 
