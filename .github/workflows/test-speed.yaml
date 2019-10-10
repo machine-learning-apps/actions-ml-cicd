@@ -1,4 +1,4 @@
-name: Demo
+name: test speed
 on: push
 
 jobs:
