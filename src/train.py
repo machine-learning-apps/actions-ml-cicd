@@ -45,8 +45,8 @@ assert train_body_vecs.shape[0] == train_title_vecs.shape[0] == train_labels.sha
 assert test_body_vecs.shape[0] == test_title_vecs.shape[0] == test_labels.shape[0]
 
 # build model architecture
-body_emb_size = 50
-title_emb_size = 50
+body_emb_size = 85
+title_emb_size = 85
 batch_size = 900
 epochs = 4
 
