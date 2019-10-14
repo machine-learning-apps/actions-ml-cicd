@@ -1,11 +1,32 @@
 # A Collection of GitHub Actions That Facilitate MLOps
 
+## A Collection Of GitHub Actions That Enable MLOps and CI/CD For Machine Learning:
+
+Below is a collection of GitHub Actions that we are curating or building that facilitate machine learning workflows:
+
+### 1. ChatOps
+   - [Action: ChatOps From Pull Requests](https://github.com/marketplace/actions/chatops-for-actions-in-pull-requests): Listens to ChatOps commands in PRs and emits variables that downstream Actions can branch on.
+
+
+### 2. Submitting Argo workflows
+[Argo](https://argoproj.github.io/) allows you to orechestrate machine learning pipelines that run on Kubernetes.
+
+  - [Action: Submit Argo Workflows on GKE](https://github.com/marketplace/actions/submit-argo-workflows-to-gke) - leverages the gcloud cli to authenticate to your GKE cluster and submit argo workflows.
+  - [Action: Submit Argo Workflows on K8s (Cloud agnostic)](https://github.com/marketplace/actions/submit-argo-workflows-from-github) - requires that you supply a kubeconfig file to authenticate to your k8 cluster.
+
+### 3. Query Experiment Tracking Results
+  - [Action: Fetch runs from Weights & Biases](https://github.com/marketplace/actions/get-runs-from-weights-biases) - W&B is an experiment tracking and logging system for machine learning, and is free for open source projects.
+
+### 4. Publish Docker Images
+  - [Action: Publish Container To The GitHub Package Registry](https://github.com/marketplace/actions/publish-docker-images-to-gpr).  See this [doc](https://github.com/features/package-registry) on more information on the GitHub Package Registry
+  - [Action: Publish Container To a Generic Registry](https://github.com/marketplace/actions/publish-docker)
+
 ## What is MLOps?  
 
 Useful resources:
 
-- Paperspace - CI/CD for Machine Learning & AI: [Talk](https://databricks.com/session/ci-cd-for-machine-learning), [Blog](https://blog.paperspace.com/ci-cd-for-machine-learning-ai/)
 - [Hidden Technical Debt in Machine Learning Systems](https://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems.pdf)
+- Paperspace - CI/CD for Machine Learning & AI: [Talk](https://databricks.com/session/ci-cd-for-machine-learning), [Blog](https://blog.paperspace.com/ci-cd-for-machine-learning-ai/)
 
 
 ## Example Of What We Are Trying To Solve With MLOps:
@@ -31,24 +52,3 @@ In an ideal world, the participants in the above code review should be provided 
 >![](images/mlops.png)
 
 View the demo pull request [here](https://github.com/machine-learning-apps/actions-ml-cicd/pull/23).  What is shown above is only the tip of the iceberg!  Keep reading for links to more Actions. 
-
-# A Collection Of GitHub Actions That Enable MLOps and CI/CD For Machine Learning:
-
-Below is a collection of GitHub Actions that we are curating or building that facilitate machine learning workflows:
-
-### 1. ChatOps
-   - [Action: ChatOps From Pull Requests](https://github.com/marketplace/actions/chatops-for-actions-in-pull-requests): Listens to ChatOps commands in PRs and emits variables that downstream Actions can branch on.
-
-
-### 2. Submitting Argo workflows
-[Argo](https://argoproj.github.io/) allows you to orechestrate machine learning pipelines that run on Kubernetes.
-
-  - [Action: Submit Argo Workflows on GKE](https://github.com/marketplace/actions/submit-argo-workflows-to-gke) - leverages the gcloud cli to authenticate to your GKE cluster and submit argo workflows.
-  - [Action: Submit Argo Workflows on K8s (Cloud agnostic)](https://github.com/marketplace/actions/submit-argo-workflows-from-github) - requires that you supply a kubeconfig file to authenticate to your k8 cluster.
-
-### 3. Query Experiment Tracking Results
-  - [Action: Fetch runs from Weights & Biases](https://github.com/marketplace/actions/get-runs-from-weights-biases) - W&B is an experiment tracking and logging system for machine learning, and is free for open source projects.
-
-### 4. Publish Docker Images
-  - [Action: Publish Container To The GitHub Package Registry](https://github.com/marketplace/actions/publish-docker-images-to-gpr).  See this [doc](https://github.com/features/package-registry) on more information on the GitHub Package Registry
-  - [Action: Publish Container To a Generic Registry](https://github.com/marketplace/actions/publish-docker)
