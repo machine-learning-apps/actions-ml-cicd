@@ -5,7 +5,7 @@
 Below is a collection of GitHub Actions that we are curating or building that facilitate machine learning workflows:
 
 ### 1. ChatOps
-   - [Action: ChatOps From Pull Requests](https://github.com/marketplace/actions/chatops-for-actions-in-pull-requests): Listens to ChatOps commands in PRs and emits variables that downstream Actions can branch on.
+   - [Action: ChatOps For Pull Requests](https://github.com/marketplace/actions/chatops-for-pull-requests): Listens to ChatOps commands in PRs and emits variables that downstream Actions can branch on.
 
 
 ### 2. Submitting Argo workflows
