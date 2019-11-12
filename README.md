@@ -51,4 +51,4 @@ In an ideal world, the participants in the above code review should be provided 
 
 >![](images/mlops.png)
 
-View the demo pull request [here](https://github.com/machine-learning-apps/actions-ml-cicd/pull/23).  What is shown above is only the tip of the iceberg!  Keep reading for links to more Actions. 
+View the demo pull request [here](https://github.com/machine-learning-apps/actions-ml-cicd/pull/23).  What is shown above is only the tip of the iceberg! 
