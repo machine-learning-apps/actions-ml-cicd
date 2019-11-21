@@ -1,5 +1,7 @@
 # A Collection of GitHub Actions That Facilitate MLOps
 
+Materials that accompany the talk [MLOps with GitHub Actions & Kubernetes](https://youtu.be/Ll50l3fsoYs)
+
 ## A Collection Of GitHub Actions That Enable MLOps and CI/CD For Machine Learning:
 
 Below is a collection of GitHub Actions that we are curating or building that facilitate machine learning workflows:
