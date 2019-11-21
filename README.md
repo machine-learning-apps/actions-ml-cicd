@@ -23,10 +23,7 @@ Below is a collection of GitHub Actions that we are curating or building that fa
 
 ## What is MLOps?  
 
-Useful resources:
-
-- [Hidden Technical Debt in Machine Learning Systems](https://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems.pdf)
-- Paperspace - CI/CD for Machine Learning & AI: [Talk](https://databricks.com/session/ci-cd-for-machine-learning), [Blog](https://blog.paperspace.com/ci-cd-for-machine-learning-ai/)
+See [this demo](https://youtu.be/Ll50l3fsoYs) explaining this project and more background on what MLOps is and why it is needed.
 
 
 ## Example Of What We Are Trying To Solve With MLOps:
