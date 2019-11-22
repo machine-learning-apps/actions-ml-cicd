@@ -63,3 +63,9 @@ View the demo pull request [here](https://github.com/machine-learning-apps/actio
    - **see-payload.yaml & see_token.yaml** - these files were used for debugging and can be safely ignored.  
 - **/action_files**: these are a collection of shell scripts and python files that are run at various steps in the workflow files mentioned above.  
 - **/src** - these are the files that define the pre-processing and training of the model.  These files are copied into the appropriate Docker container images in the workflow when the workflow is triggered.
+
+## Recommended Way Of Getting Started With GitHub Actions and MLOps
+
+The example in this repo is end-to-end and requires familiarity with Kubernetes and GitHub Actions to fully understand.  When starting out, we recommend automating one part of your workflow, such as reporting experiment tracking or deploying models.  As you learn more about the syntax of GitHub Actions you can increase the scope of your workflow as appropriate.  
+
+For any questions, please open an issue in this repo. 
