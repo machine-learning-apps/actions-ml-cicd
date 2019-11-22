@@ -66,6 +66,8 @@ View the demo pull request [here](https://github.com/machine-learning-apps/actio
 
 ## Recommended Way Of Getting Started With GitHub Actions and MLOps
 
-The example in this repo is end-to-end and requires familiarity with Kubernetes and GitHub Actions to fully understand.  When starting out, we recommend automating one part of your workflow, such as reporting experiment tracking or deploying models.  As you learn more about the syntax of GitHub Actions you can increase the scope of your workflow as appropriate.  
+The example in this repo is end-to-end and requires familiarity with Kubernetes and GitHub Actions to fully understand.  When starting out, we recommend automating one part of your workflow, such as deploying models.  As you learn more about the syntax of GitHub Actions you can increase the scope of your workflow as appropriate.  
+
+We also encourage you to [make GitHub Actions for others to use](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/publishing-actions-in-github-marketplace) to accomodate other tools. 
 
 For any questions, please open an issue in this repo. 
