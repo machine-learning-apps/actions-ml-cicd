@@ -46,8 +46,8 @@ In an ideal world, the participants in the above code review should be provided 
 
 [GitHub Actions](https://github.com/features/actions) allow you to compose a set of pre-built CI/CD tools or make your own, allowing you to compose a workflow that enables MLOps from GitHub.  The below example composes the following Actions into useful pipeline:
 
- [ChatOps](https://github.com/marketplace/actions/chatops-via-pr-labels) &rightarrow; [Deploy Argo ML Workflows](https://github.com/machine-learning-apps/gke-argo) &rightarrow;  [Weights & Biases Experiment Tracking](https://github.com/machine-learning-apps/wandb-action):
+ [ChatOps](https://github.com/marketplace/actions/chatops-via-pr-labels) &rightarrow; [Deploy Argo ML Workflows](https://github.com/machine-learning-apps/gke-argo) &rightarrow;  [Weights & Biases Experiment Tracking](https://github.com/machine-learning-apps/wandb-action) -> Deploy Model:
 
 >![](images/mlops.png)
 
-View the demo pull request [here](https://github.com/machine-learning-apps/actions-ml-cicd/pull/23).  What is shown above is only the tip of the iceberg! 
+View the demo pull request [here](https://github.com/machine-learning-apps/actions-ml-cicd/pull/34).  What is shown above is only the tip of the iceberg! 
