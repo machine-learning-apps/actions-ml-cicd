@@ -1,0 +1,55 @@
+---
+layout: default
+---
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<style>
+    a {color: #7253ed}	  
+    a.navigation-list-link {color: #7253ed}
+
+.language-python { border-left: 1px solid lightcoral; }
+
+.language-python + .language-plaintext {
+        border-left: 1px solid grey;
+        margin-left: 1rem !important;
+}
+.language-python + .language-plaintext code { background-color: white !important; }
+.language-python + .language-plaintext pre  { background-color: white !important; }
+
+.input_area pre, .input_area div {
+        margin-bottom:0.1rem !important;
+        margin-top:0.1rem !important;
+        padding-bottom:0 !important;
+        padding-top:0 !important;
+}
+.output_area pre, .output_area div {
+        margin-bottom:0.1rem !important;
+        margin-top:0.1rem !important;
+        padding-bottom:0 !important;
+        padding-top:0 !important;
+        background-color: white !important;
+}
+
+.output_area pre {
+        border-left: 1px solid grey;
+        margin-left: 1rem !important;
+}
+.codecell {
+        border-right: 2px solid lightgrey !important;
+        margin-bottom:5rem !important;
+        margin-top:5rem !important;
+        padding-bottom:0 !important;
+        padding-top:0 !important;
+}
+
+.codecell table { width: auto; }
+
+</style>
+
+<div class="clearfix">
+    <a class="btn btn-sm" href="{{ site.repo_url }}blob/master/{{ page.nb_path }}" role="button">
+      {% octicon mark-github %}
+      <span>View On GitHub</span>
+    </a>
+  </div>
+<br>
+{{ content }}
