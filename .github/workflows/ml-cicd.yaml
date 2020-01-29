@@ -53,9 +53,9 @@ jobs:
       if: steps.label.outputs.TRIGGERED == 'true'
       run: |
         cd $GITHUB_WORKSPACE
-        echo "GITHUB-SHA: $SHA" >> argo/params.yaml
-        echo "PR-NUMBER: $PR_NUMBER" >> argo/params.yaml
-        echo "REPO: $GITHUB_REPOSITORY" >> argo/params.yaml
+        echo "GITHUB-SHA: $SHA" >> pipelines/params.yaml
+        echo "PR-NUMBER: $PR_NUMBER" >> pipelines/params.yaml
+        echo "REPO: $GITHUB_REPOSITORY" >> pipelines/params.yaml
       env:
         SHA: ${{ steps.label.outputs.HEAD_SHA }}
         PR_NUMBER: ${{ steps.label.outputs.ISSUE_NUMBER }}
@@ -70,8 +70,8 @@ jobs:
         PROJECT_ID: ${{ secrets.GOOGLE_PROJECT_ID }}
         LOCATION_ZONE: "us-west1-a"
         CLUSTER_NAME: "github-actions-demo"
-        WORKFLOW_YAML_PATH: "argo/workflow.yaml" # the argo workflow file relative to the repo's root.
-        PARAMETER_FILE_PATH: "argo/params.yaml" # optional parameter file.
+        WORKFLOW_YAML_PATH: "pipelines/workflow.yaml" # the argo workflow file relative to the repo's root.
+        PARAMETER_FILE_PATH: "pipelines/params.yaml" # optional parameter file.
         SHA: ${{ steps.label.outputs.HEAD_SHA }}
   
     - name: Create Check
