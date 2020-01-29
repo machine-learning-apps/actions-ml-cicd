@@ -3,7 +3,7 @@ on: [issue_comment]
 
 jobs:
   full-test-run:
-    if: github.event.issue.pull_request != null &&  contains(github.event.comment.body, '/run-full-test') && (github.actor == 'hamelsmu' || github.actor == 'hohsiangwu'  || github.actor == 'inc0')
+    if: github.event.issue.pull_request != null &&  contains(github.event.comment.body, '/run-full-test') && (github.actor == 'hamelsmu' || github.actor == 'hohsiangwu'  || github.actor == 'inc0' || github.actor == 'awmatheson')
     runs-on: ubuntu-latest
     steps:
       - uses: machine-learning-apps/actions-chatops@master
