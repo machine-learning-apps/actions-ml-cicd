@@ -21,7 +21,7 @@ jobs:
     
     - name: Run notebook converter
       run: |
-        chmod -R 777 _posts/
+        chmod -R 777 docs/docs/reports
         pip install --upgrade pip
         pip install jupyter_client ipykernel
         python3 -m ipykernel install --user
