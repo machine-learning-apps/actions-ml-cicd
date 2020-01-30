@@ -8,7 +8,7 @@ on:
       - 'notebooks/*.ipynb'
 
 jobs:
-convert-notebooks:
+  convert-notebooks:
     runs-on: ubuntu-latest
     steps:
     - name: Copy Repository Contents
