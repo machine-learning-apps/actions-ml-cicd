@@ -1,11 +1,9 @@
 ---
-layout: home
+layout: primer
 title: Home
 permalink: /
 nav_order: 1
 ---
-
-<center><p class="label label-red" style="opacity: 0.6;">Mockup / Illustrative</p></center>
 
 <center>
     <img src="https://ghicons.github.com/assets/images/light/Pull%20Request.png" alt="" 

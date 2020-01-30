@@ -1,0 +1,40 @@
+  
+name: Convert Notebooks To Docs
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'notebooks/*.ipynb'
+
+jobs:
+  convert-notebooks:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Copy Repository Contents
+      uses: actions/checkout@master
+
+    - uses: actions/setup-python@v1
+      with:
+        python-version: '3.6'
+        architecture: 'x64'
+    
+    - name: Run notebook converter
+      run: |
+        chmod -R 777 _posts/
+        pip install --upgrade pip
+        pip install jupyter_client ipykernel
+        python3 -m ipykernel install --user
+        git clone https://github.com/fastai/nbdev.git
+        pip install -e nbdev
+        cp nbdev/settings.ini .
+        python action_files/nb2docs.py
+
+    - name: commit & push files
+      run: |
+        git config --global user.name $GITHUB_ACTOR
+        git remote add github "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git"
+        git pull github ${GITHUB_REF} --ff-only
+        git add _posts
+        git commit -m "Update Jupyter Blog Posts" --allow-empty
+        git push github HEAD:${GITHUB_REF}
