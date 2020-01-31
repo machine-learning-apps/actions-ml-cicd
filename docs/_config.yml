@@ -23,8 +23,8 @@ title: MLOps Dashboard
 email: support@github.com
 
 description: A Dashboard for MLOps, generated automatically by GitHub Pages.
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "/" # the subpath of your site, e.g. /blog
+url: "https://machine-learning-apps.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: jekyllrb
 github_username:  jekyll
 repo_url: "https://github.com/machine-learning-apps/actions-ml-cicd/"
