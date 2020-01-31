@@ -1,3 +1,13 @@
+---
+layout: primer
+title: Summary
+permalink: /summary
+nav_order: 2
+---
+
+1. TOC
+{:toc}
+ 
 ## Model Details
 
  - Developed by researchers at Google and the University of Toronto, 2018, v1.
@@ -46,4 +56,4 @@ is inferred or annotated.
 
  - Does not capture race or skin type, which has been reported as a source of disproportionate errors [5].
  - Given gender classes are binary (male/not male), which we include as male/female. Further work needed to evaluate across a spectrum of genders.
- - An ideal evaluation dataset would additionally include annotations for Fitzpatrick skin type, camera details, and environment (lighting/humidity) details.
+ - An ideal evaluation dataset would additionally include annotations for Fitzpatrick skin type, camera details, and environment (lighting/humidity) details. 

@@ -1,0 +1,36 @@
+name: Project Data to Pages
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'project/model_card.md'
+      - 'project/data_dictionary.md'
+      - 'project/model_timeline.csv'
+
+jobs:
+  copy-files:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Copy Repository Contents
+      uses: actions/checkout@master
+
+    - uses: actions/setup-python@v1
+      with:
+        python-version: '3.6'
+        architecture: 'x64'
+    
+      # Copy the files and append appropriate jekyll headers
+    - name: move and modify files
+      run: |
+        chmod -R 777 docs/docs
+        ./action_files/copy_files.sh
+
+    - name: commit & push files
+      run: |
+        git config --global user.name $GITHUB_ACTOR
+        git remote add github "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git"
+        git pull github ${GITHUB_REF} --ff-only
+        git add docs/model_card docs/model_timeline docs/data_dictionary
+        git commit -m "Update Jupyter Blog Posts" --allow-empty
+        git push github HEAD:${GITHUB_REF}
