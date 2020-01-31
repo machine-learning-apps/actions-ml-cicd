@@ -1,0 +1,59 @@
+name: Project Data to Pages
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'project/model_card.md'
+      - 'project/data_dictionary.md'
+      - 'project/model_timeline.csv'
+
+jobs:
+  copy-files:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Copy Repository Contents
+      uses: actions/checkout@master
+
+    - uses: actions/setup-python@v1
+      with:
+        python-version: '3.6'
+        architecture: 'x64'
+    
+      # Copy the files and append appropriate jekyll headers
+    - name: move and modify files
+      run: |
+        chmod -R 777 docs/docs
+        echo "---
+layout: default
+title: Summary
+nav_order: 2
+---
+
+<center><p class=label label-red style=opacity: 0.6
+-bash: >Mockup / Illustrative</p></center>
+
+1. TOC
+{:toc}" > project/temp.md && for f in project/temp.md project/model_card.md; do cat "$f"; echo " "; done > project/output.md && mv project/output.md docs/docs/model_card.md
+        echo "---
+layout: default
+title: Data Dictionary
+nav_order: 3
+---
+
+<center><p class=label label-red style=opacity: 0.6
+-bash: >Mockup / Illustrative</p></center>
+
+1. TOC
+{:toc}" > project/temp.md && for f in project/temp.md project/data_dictionary.md; do cat "$f"; echo " "; done > project/output.md && mv project/output.md docs/docs/data_dictionary.md     
+        cp project/model_events.csv docs/_data/model_events.csv
+
+
+    - name: commit & push files
+      run: |
+        git config --global user.name $GITHUB_ACTOR
+        git remote add github "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git"
+        git pull github ${GITHUB_REF} --ff-only
+        git add _posts
+        git commit -m "Update Jupyter Blog Posts" --allow-empty
+        git push github HEAD:${GITHUB_REF}
