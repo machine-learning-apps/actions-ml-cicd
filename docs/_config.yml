@@ -18,7 +18,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-remote_theme: pmarsceill/just-the-docs
+theme: just-the-docs
 title: MLOps Dashboard
 email: support@github.com
 
