@@ -2,8 +2,8 @@
 layout: notebooks
 parent: Reports
 keywords: fastai
-summary: Show descriptive statistics of the dataset
-title: Descriptive Statistics
+summary: Exploratory Data Analysis
+title: EDA
 nb_path: notebooks/EDA.ipynb
 
 
