@@ -3,7 +3,7 @@ layout: notebooks
 parent: Reports
 keywords: fastai
 summary: Some more stuff
-title: This is some stuff
+title: This is some different stuff
 nb_path: notebooks/cool_stuff.ipynb
 
 
