@@ -37,4 +37,4 @@ jobs:
         git pull github ${GITHUB_REF} --ff-only
         git add docs/docs/reports
         git commit -m "Update Jupyter Blog Posts" --allow-empty
-        git push github HEAD:${GITHUB_REF}
+        git push -f github HEAD:${GITHUB_REF}
