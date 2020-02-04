@@ -6,7 +6,7 @@
 | ----------- | ----------- |
 | Number of Variables | 17 |
 | Number of Observations | 4521 |
-| Total Missing | 0.0% |
+| Total Missing | 1.1% |
 | Total Size in Memory | 600.5 KiB |
 | Average Record Size in Memory | 136 B |
 
