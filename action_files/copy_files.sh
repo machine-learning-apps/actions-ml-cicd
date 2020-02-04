@@ -1,3 +1,8 @@
+#!/bin/bash
+
+set -e
+# set -ex
+
 echo "---
 layout: primer
 title: Summary
