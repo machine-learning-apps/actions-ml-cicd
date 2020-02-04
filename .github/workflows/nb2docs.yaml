@@ -1,4 +1,3 @@
-  
 name: Convert Notebooks To Docs
 on:
   push:
@@ -31,5 +30,7 @@ jobs:
         python action_files/nb2docs.py
 
     - name: commit & push files
+      env:
+        ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
       run: ./action_files/push_to_repo.sh docs/docs/reports
 

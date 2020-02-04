@@ -27,4 +27,6 @@ jobs:
         ./action_files/copy_files.sh
 
     - name: commit & push files
+      env:
+        ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
       run: ./action_files/push_to_repo.sh docs/model_card docs/model_timeline docs/data_dictionary
