@@ -31,5 +31,5 @@ jobs:
         python action_files/nb2docs.py
 
     - name: commit & push files
-      run: ./action_files/push_to_repo.sh
+      run: ./action_files/push_to_repo.sh docs/docs/reports
 

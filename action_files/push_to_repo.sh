@@ -3,8 +3,8 @@
 set -e
 # set -ex
 
-repos=( "$@" )
-echo "Generating push for $repos"
+dirs=( "$@" )
+echo "Generating push for $dirs"
 
 # setup ssh: allow key to be used without a prompt and start ssh agent
 export GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
@@ -19,6 +19,6 @@ chmod 400 mykey
 ssh-add mykey
 
 git pull pages ${GITHUB_REF} --ff-only
-git add docs/model_card docs/model_timeline docs/data_dictionary
+git add $dirs
 git commit -m "Update ds-pages" --allow-empty
 git push github HEAD:${GITHUB_REF}
