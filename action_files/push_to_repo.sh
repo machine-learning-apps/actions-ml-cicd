@@ -6,6 +6,6 @@ set -e
 git config --global user.name $GITHUB_ACTOR
 git remote add github-pages "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git"
 git pull github-pages ${GITHUB_REF} --ff-only
-git add docs/model_card docs/model_timeline docs/data_dictionary
+git add docs/docs/model_card docs/docs/model_timeline docs/docs/data_dictionary
 git commit -m "Update Jupyter Blog Posts" --allow-empty
 git push github-pages HEAD:${GITHUB_REF}
