@@ -9,24 +9,29 @@ on:
       - 'project/model_timeline.csv'
 
 jobs:
-  copy-files:
+  copy-build-deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: Copy Repository Contents
-      uses: actions/checkout@master
+      - uses: actions/checkout@master
+      
+      - name: Copy Repository Contents
+        run: |
+          chmod -R 777 docs/docs
+          ./action_files/copy_files.sh
+          ./action_files/push_to_repo.sh
 
-    - uses: actions/setup-python@v1
-      with:
-        python-version: '3.6'
-        architecture: 'x64'
-    
-      # Copy the files and append appropriate jekyll headers
-    - name: move and modify files
-      run: |
-        chmod -R 777 docs/docs
-        ./action_files/copy_files.sh
+      - name: setup directories for Jekyll build
+        run: |
+          rm -rf _site
+          sudo chmod -R 777 .
 
-    - name: commit & push files
-      env:
-        ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-      run: ./action_files/push_to_repo.sh docs/model_card docs/model_timeline docs/data_dictionary
+      - name: Jekyll build
+        uses: docker://jekyll/jekyll
+        with:
+          args: jekyll build
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3.0.2
+        env:
+          ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          PUBLISH_DIR: ./_site

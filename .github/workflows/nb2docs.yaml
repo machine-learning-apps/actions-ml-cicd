@@ -7,30 +7,34 @@ on:
       - 'notebooks/*.ipynb'
 
 jobs:
-  convert-notebooks:
+  convert-notebook:
+    if: contains(join(github.event.commits.*.message), '/sync')
     runs-on: ubuntu-latest
     steps:
     - name: Copy Repository Contents
       uses: actions/checkout@master
-
-    - uses: actions/setup-python@v1
       with:
-        python-version: '3.6'
-        architecture: 'x64'
-    
-    - name: Run notebook converter
-      run: |
-        chmod -R 777 docs/docs/reports
-        pip install --upgrade pip
-        pip install jupyter_client ipykernel
-        python3 -m ipykernel install --user
-        git clone https://github.com/fastai/nbdev.git
-        pip install -e nbdev
-        cp nbdev/settings.ini .
-        python action_files/nb2docs.py
+        persist-credentials: false
 
-    - name: commit & push files
+    - uses: fastai/fastpages@master
+      with:
+        BOOL_SAVE_MARKDOWN: true
+        SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
+        FORMAT: 'notebook'
+
+    - name: setup directories for Jekyll build
+      run: |
+        rm -rf _site
+        sudo chmod -R 777 .
+    - name: Jekyll build
+      uses: docker://jekyll/jekyll
+      with:
+        args: jekyll build
+
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v2
       env:
         ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-      run: ./action_files/push_to_repo.sh docs/docs/reports
+        PUBLISH_DIR: ./_site
+        keep_files: true
 
