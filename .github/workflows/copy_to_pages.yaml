@@ -22,7 +22,6 @@ jobs:
 
       - name: setup directories for Jekyll build
         run: |
-          cd ~/docs
           rm -rf docs/_site
           sudo chmod -R 777 .
 
