@@ -6,7 +6,7 @@ on:
     paths:
       - 'project/model_card.md'
       - 'project/data_dictionary.md'
-      - 'project/model_timeline.csv'
+      - 'project/model_events.csv'
 
 jobs:
   copy-build-deploy:
