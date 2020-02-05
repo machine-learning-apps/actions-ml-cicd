@@ -57,4 +57,4 @@ is inferred or annotated.
  - Does not capture race or skin type, which has been reported as a source of disproportionate errors [5].
  - Given gender classes are binary (male/not male), which we include as male/female. Further work needed to evaluate across a spectrum of genders.
  - An ideal evaluation dataset would additionally include annotations for Fitzpatrick skin type, camera details, and environment (lighting/humidity) details.
- 
+ - This is an example. 
