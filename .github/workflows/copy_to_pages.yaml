@@ -28,9 +28,8 @@ jobs:
 
       - name: Jekyll build
         uses: docker://jekyll/jekyll
-        with:
-          volumes: /home/runner/work/actions-ml-cicd/actions-ml-cicd:/***/workspace  
-          args: jekyll build -s ./docs -d ./docs/_site
+        with:  
+          args: jekyll build -s ./docs -d ./docs/_site --trace
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3.0.2
