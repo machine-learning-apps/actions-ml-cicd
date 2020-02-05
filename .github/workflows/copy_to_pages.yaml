@@ -30,7 +30,7 @@ jobs:
         uses: docker://jekyll/jekyll
         with:
           volumes: /home/runner/work/actions-ml-cicd/actions-ml-cicd:/***/workspace  
-          args: jekyll build -s ./docs
+          args: jekyll build -s ./docs -d ./docs/_site
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3.0.2
