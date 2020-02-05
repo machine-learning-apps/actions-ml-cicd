@@ -22,17 +22,15 @@ jobs:
 
       - name: setup directories for Jekyll build
         run: |
-          cd ~/docs
-          rm -rf docs/_site
+          cd docs
+          rm -rf _site
           sudo chmod -R 777 .
-
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v1
 
       - name: Jekyll build
         uses: docker://jekyll/jekyll
         with:
-          args: jekyll build
+          volumes: /home/runner/work/actions-ml-cicd/actions-ml-cicd:/***/workspace  
+          args: jekyll build -s ./docs
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3.0.2
