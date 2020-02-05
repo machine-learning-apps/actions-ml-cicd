@@ -15,8 +15,8 @@
 |  |  |
 | ------- | --- |
 | Numeric | 7 |
-| Categorical | 10 |
-| Boolean | 0 |
+| Categorical | 9 |
+| Boolean | 1 |
 | Date |0 |
 | Text (Unique) | 0 |
 | Rejected | 0 |
