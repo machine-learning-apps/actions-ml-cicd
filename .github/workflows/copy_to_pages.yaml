@@ -26,13 +26,14 @@ jobs:
           rm -rf _site
           sudo chmod -R 777 .
           
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v1
+#       - name: Setup tmate session
+#         uses: mxschmitt/action-tmate@v1
 
       - name: Jekyll build
         uses: docker://jekyll/jekyll
         with:
-          args: jekyll build -d ./docs/_site -s ./docs --config ./docs/_config.yml --layouts ./docs/_layouts --trace
+          working-directory: /***/workspace/docs
+          args: jekyll build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3.0.2
