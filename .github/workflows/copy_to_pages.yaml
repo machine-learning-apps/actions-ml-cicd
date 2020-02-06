@@ -30,7 +30,7 @@ jobs:
 #         uses: mxschmitt/action-tmate@v1
 
       - name: Jekyll build
-        uses: .github/workflows/jekyll_build.yaml
+        uses: ./.github/workflows/jekyll_build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3.0.2
