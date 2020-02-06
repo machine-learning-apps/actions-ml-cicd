@@ -1,0 +1,72 @@
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely edit after that. If you find
+# yourself editing this file very often, consider using Jekyll's data files
+# feature for the data you need to update frequently.
+#
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
+#
+# If you need help with YAML syntax, here are some quick references for you: 
+# https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
+# https://learnxinyminutes.com/docs/yaml/
+#
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.myvariable }}.
+
+theme: just-the-docs
+title: MLOps Dashboard
+email: support@github.com
+
+description: A Dashboard for MLOps, generated automatically by GitHub Pages.
+baseurl: "/" # the subpath of your site, e.g. /blog
+url: "https://machine-learning-apps.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+twitter_username: jekyllrb
+github_username:  jekyll
+repo_url: "https://github.com/machine-learning-apps/actions-ml-cicd/"
+
+permalink: pretty
+exclude: ["node_modules/", "*.gemspec", "*.gem", "Gemfile", "Gemfile.lock", "package.json", "package-lock.json",  "script/", "LICENSE.txt", "lib/", "bin/", "README.md", "Rakefile"]
+
+# Enable or disable the site search
+search_enabled: true
+
+# Set the search token separator for hyphenated-word search:
+search_tokenizer_separator: /[\s/]+/
+
+# Enable or disable heading anchors
+heading_anchors: true
+
+# Aux links for the upper right navigation
+aux_links:
+  "Edit On GitHub":
+    - "//github.com/machine-learning-apps/actions-ml-cicd/tree/master/docs"
+
+# Footer content appears at the bottom of every page's main content
+footer_content: ""
+
+# Color scheme currently only supports "dark" or nil (default)
+color_scheme: nil
+
+
+compress_html:
+  clippings: all
+  comments: all
+  endings: all
+  startings: []
+  blanklines: false
+  profile: false
+
+relative_links:
+  enabled: true
+
+# Build settings
+plugins:
+  - jekyll-feed
+  - jekyll-octicons
+  - jekyll-relative-links
+  - jekyll-remote-theme

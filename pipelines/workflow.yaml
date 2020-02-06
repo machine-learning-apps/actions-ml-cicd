@@ -1,0 +1,162 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName:  actions-
+  labels:
+    workflow: actions 
+spec:
+  entrypoint: actions
+  onExit: exit-handler
+  arguments:
+    parameters:
+    - name: GITHUB-SHA
+      value: NOT_SUPPLIED
+    - name: WANDB-ENTITY
+      value: NOT_SUPPLIED
+    - name: WANDB-PROJECT
+      value: NOT_SUPPLIED
+    - name: PR-NUMBER
+      value: 0
+    - name: REPO
+      value: NOT_SUPPLIED
+
+  templates:
+  - name: actions 
+    dag:
+      tasks:
+      - name: preprocess
+        template: preprocess
+
+      - name: model1
+        dependencies: [preprocess]
+        template: train
+        arguments:
+          artifacts:
+          - name: dataset
+            from: "{{tasks.preprocess.outputs.artifacts.dataset}}"
+
+  - name: preprocess
+    container:
+      image: hamelsmu/ml-cicd
+      name: preprocess
+      command: ["python", "/src/preprocess.py"]
+      env:
+        - name: DASK_SCHEDULER_ADDRESS
+          valueFrom:
+            secretKeyRef:
+              name: ml-cicd
+              key: DASK_SCHEDULER_ADDRESS
+    outputs:
+     artifacts:
+     - name: dataset
+       path: /data
+
+  - name: train
+    inputs:
+      artifacts:
+      - name: dataset
+        path: /data
+    container:
+      image: hamelsmu/ml-cicd-gpu
+      name: trainer
+      resources:
+        requests:
+          nvidia.com/gpu: 1 # requesting 1 GPU
+        limits:
+          nvidia.com/gpu: 1
+      command: ["python", "/src/train.py"]
+      env:
+      - name: WANDB_API_KEY
+        valueFrom:
+          secretKeyRef:
+            name: ml-cicd
+            key: WANDB_API_KEY
+      - name: WANDB_USERNAME
+        valueFrom:
+          secretKeyRef:
+            name: ml-cicd
+            key: WANDB_USERNAME
+      - name: GITHUB_SHA
+        value: "{{workflow.parameters.GITHUB-SHA}}"
+      - name: WANDB_ENTITY
+        value: "{{workflow.parameters.WANDB-ENTITY}}"
+      - name: WANDB_PROJECT
+        value: "{{workflow.parameters.WANDB-PROJECT}}"
+
+    outputs:
+     artifacts:
+     - name: model
+       path: /output
+
+  - name: exit-handler
+    steps:
+    - - name: success
+        template: success
+        when: "{{workflow.status}} == Succeeded"
+    - - name: fail
+        template: fail
+        when: "{{workflow.status}} != Succeeded"
+  - name: success
+    script:
+      image: nyurik/alpine-python3-requests:latest
+      command: [python]
+      source: |
+        import os, requests
+        sha = os.getenv('GITHUB_SHA')
+        owner, repo = os.getenv('REPO').split("/")
+        pr_num = os.getenv('PR_NUMBER')
+        personal_access_token = os.getenv('PAT')
+        # build the request
+        url = f'https://api.github.com/repos/{owner}/{repo}/dispatches'
+        headers = {'authorization': f'token {personal_access_token}',
+                   'accept': 'application/vnd.github.everest-preview+json'}
+        payload = {'sha': sha, 'pr_num': pr_num, 'conclusion': 'success'}
+        # stuff a payload into the event_type string
+        data = {'event_type': f'{payload}'}
+        response = requests.post(url=url, headers=headers, json=data)
+        assert response.status_code == 204
+        print(response)
+      env:
+      - name: GITHUB_SHA
+        value: "{{workflow.parameters.GITHUB-SHA}}"
+      - name: PR_NUMBER
+        value: "{{workflow.parameters.PR-NUMBER}}"
+      - name: REPO
+        value: "{{workflow.parameters.REPO}}"
+      - name: PAT
+        valueFrom:
+          secretKeyRef:
+            name: ml-cicd
+            key: PAT
+  - name: fail
+    script:
+      image: nyurik/alpine-python3-requests:latest
+      command: [python]
+      source: |
+        import os, requests
+        sha = os.getenv('GITHUB_SHA')
+        owner, repo = os.getenv('REPO').split("/")
+        pr_num = os.getenv('PR_NUMBER')
+        personal_access_token = os.getenv('PAT')
+        # build the request
+        url = f'https://api.github.com/repos/{owner}/{repo}/dispatches'
+        headers = {'authorization': f'token {personal_access_token}',
+                   'accept': 'application/vnd.github.everest-preview+json'}
+        payload = {'sha': sha, 'pr_num': pr_num, 'conclusion': 'failure'}
+        # stuff a payload into the event_type string
+        data = {'event_type': f'{payload}'}
+        response = requests.post(url=url, headers=headers, json=data)
+        assert response.status_code == 204
+        print(response)
+      env:
+      - name: GITHUB_SHA
+        value: "{{workflow.parameters.GITHUB-SHA}}"
+      - name: PR_NUMBER
+        value: "{{workflow.parameters.PR-NUMBER}}"
+      - name: REPO
+        value: "{{workflow.parameters.REPO}}"
+      - name: PAT
+        valueFrom:
+          secretKeyRef:
+            name: ml-cicd
+            key: PAT
