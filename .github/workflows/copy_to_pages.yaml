@@ -38,3 +38,4 @@ jobs:
         env:
           ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           PUBLISH_DIR: ./docs/_site
+          PUBLISH_BRANCH: master
