@@ -1,9 +1,13 @@
+name: jekyll_build
+on: [push]
 jobs:
-  copy-build-deploy:
+  jekyll_build:
+    runs-on: ubuntu-latest
     container: 
       image: docker://jekyll/jekyll
       volumes:
         - /home/runner/work/actions-ml-cicd/actions-ml-cicd/docs:/***/workspace
     steps:
+      - uses: actions/checkout@v1
       - name: Jekyll build
         run: jekyll build
