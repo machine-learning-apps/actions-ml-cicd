@@ -32,7 +32,7 @@ jobs:
       - name: Jekyll build
         uses: docker://jekyll/jekyll
         with:
-          working-directory: /***/workspace/docs
+          volumes: /home/runner/work/actions-ml-cicd/actions-ml-cicd/docs:/***/workspace
           args: jekyll build
 
       - name: Deploy
