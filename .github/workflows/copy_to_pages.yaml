@@ -25,6 +25,9 @@ jobs:
           cd docs
           rm -rf _site
           sudo chmod -R 777 .
+          
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v1
 
       - name: Jekyll build
         uses: docker://jekyll/jekyll
