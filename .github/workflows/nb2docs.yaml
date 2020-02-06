@@ -24,12 +24,14 @@ jobs:
 
     - name: setup directories for Jekyll build
       run: |
+        cd docs
         rm -rf _site
         sudo chmod -R 777 .
+        
     - name: Jekyll build
-      uses: docker://jekyll/jekyll
-      with:
-        args: jekyll build
+      run: |
+          docker run  -v /home/runner/work/actions-ml-cicd/actions-ml-cicd/docs:/workspace -w /workspace jekyll/jekyll jekyll build
+
 
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v2
