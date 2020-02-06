@@ -30,10 +30,7 @@ jobs:
 #         uses: mxschmitt/action-tmate@v1
 
       - name: Jekyll build
-        uses: docker://jekyll/jekyll
-        with:
-          volumes: /home/runner/work/actions-ml-cicd/actions-ml-cicd/docs:/***/workspace
-          args: jekyll build
+        uses: .github/workflows/jekyll_build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3.0.2
