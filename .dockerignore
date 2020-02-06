@@ -1,5 +1,0 @@
-*.hdf5
-.*
-metadata.json
-dask-worker-space
-
