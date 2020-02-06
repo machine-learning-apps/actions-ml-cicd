@@ -1,0 +1,9 @@
+jobs:
+  copy-build-deploy:
+    container: 
+      image: docker://jekyll/jekyll
+      volumes:
+        - /home/runner/work/actions-ml-cicd/actions-ml-cicd/docs:/***/workspace
+    steps:
+      - name: Jekyll build
+        run: jekyll build
