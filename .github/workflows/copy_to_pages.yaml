@@ -31,7 +31,7 @@ jobs:
 
       - name: Jekyll build
         run: |
-            docker run  -v $(PWD)/docs:/workspace -w /workspace jekyll/jekyll jekyll build
+            docker run  -v /home/runner/work/actions-ml-cicd/actions-ml-cicd/docs:/workspace -w /workspace jekyll/jekyll jekyll build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3.0.2
