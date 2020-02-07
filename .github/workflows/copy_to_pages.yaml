@@ -30,11 +30,11 @@ jobs:
         run: |
             docker run  -v /home/runner/work/actions-ml-cicd/actions-ml-cicd/docs:/workspace -w /workspace jekyll/jekyll jekyll build
 
-#       - name: Deploy
-#         uses: peaceiris/actions-gh-pages@v2
-#         env:
-#           ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-#           PUBLISH_DIR: ./docs/_site
-#           PUBLISH_BRANCH: master
-#         with:
-#           keepFiles: true  
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v2
+        env:
+          ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          PUBLISH_DIR: ./_site
+          PUBLISH_BRANCH: gh-pages
+        with:
+          keepFiles: true  
