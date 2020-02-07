@@ -36,5 +36,3 @@ jobs:
           ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           PUBLISH_DIR: ./_site
           PUBLISH_BRANCH: gh-pages
-        with:
-          keepFiles: true  
