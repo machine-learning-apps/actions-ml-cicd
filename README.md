@@ -24,7 +24,7 @@ Below is a collection of GitHub Actions that we are curating or building that fa
   - [Action: Publish Container To a Generic Registry](https://github.com/marketplace/actions/publish-docker)
   
 ### 5. Compile and Push Pipeline to Kubeflow
-
+- [Action: To compile, deploy and run Kubeflow pipeline](https://github.com/marketplace/actions/kubeflow-compile-deploy-and-run). This action allows for improve MLOps together with [Kubeflow pipelines](https://www.kubeflow.org/docs/pipelines/overview/pipelines-overview/)
 
 ## What is MLOps?  
 
