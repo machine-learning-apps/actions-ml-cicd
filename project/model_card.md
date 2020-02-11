@@ -3,6 +3,7 @@
  - Developed by researchers at Google and the University of Toronto, 2018, v1.
  - Convolutional Neural Net.
  - Pretrained for face recognition then fine-tuned with cross-entropy loss for binary smiling classification.
+ 
 
 ## Intended Use
 
