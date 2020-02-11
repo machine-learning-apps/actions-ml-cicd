@@ -10,13 +10,10 @@ jobs:
       with:
         persist-credentials: false
 
-    - name: convert notebooks and word docs to posts
-      uses: fastai/fastpages@master
-
     - name: setup directories for Jekyll build
       run: |
-        rm -rf _site
-        sudo chmod -R 777 .
+        rm -rf docs/_site
+        sudo chmod -R 777 docs
 
     - name: Jekyll build
       uses: docker://jekyll/jekyll
