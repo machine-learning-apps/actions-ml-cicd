@@ -28,12 +28,13 @@ jobs:
           sudo chmod -R 777 .
 
       - name: Jekyll build
-        run: |
-            docker run  -v /home/runner/work/actions-ml-cicd/actions-ml-cicd/docs:/workspace -w /workspace jekyll/jekyll jekyll build
+        uses: docker://jekyll/jekyll
+        with:
+          args: jekyll build --source docs/ --destination docs/ --trace
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3.0.3
         env:
           ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-          PUBLISH_DIR: ./_site
+          PUBLISH_DIR: ./docs/_site
           PUBLISH_BRANCH: gh-pages
