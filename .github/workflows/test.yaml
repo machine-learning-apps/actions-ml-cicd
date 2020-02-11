@@ -17,7 +17,7 @@ jobs:
 
     - name: Jekyll build
       run: |
-          docker run  -v /home/runner/work/actions-ml-cicd/actions-ml-cicd/docs:/workspace -w /workspace jekyll/jekyll bundle update && jekyll build --source docs --destination docs
+          docker run  -v /home/runner/work/actions-ml-cicd/actions-ml-cicd/docs:/workspace -w /workspace jekyll/jekyll jekyll build
 
     - name:  See files
       run: ls docs
