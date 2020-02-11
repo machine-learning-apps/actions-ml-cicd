@@ -23,11 +23,11 @@ title: MLOps Example Dashboard
 email: support@github.com
 
 description: A Dashboard for MLOps, generated automatically by GitHub Pages.
-baseurl: "/" # the subpath of your site, e.g. /blog
+baseurl: "/actions-ml-cicd" # the subpath of your site, e.g. /blog
 url: "https://machine-learning-apps.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: jekyllrb
 github_username:  jekyll
-repo_url: "https://github.com/machine-learning-apps/actions-ml-cicd/"
+repo_url: "https://machine-learning-apps.github.io"
 
 permalink: pretty
 exclude: ["node_modules/", "*.gemspec", "*.gem", "Gemfile", "Gemfile.lock", "package.json", "package-lock.json",  "script/", "LICENSE.txt", "lib/", "bin/", "README.md", "Rakefile"]
