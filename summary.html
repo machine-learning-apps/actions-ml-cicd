@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Summary | MLOps Example Dashboard</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="Summary" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A Dashboard for MLOps, generated automatically by GitHub Pages." />
+<meta property="og:description" content="A Dashboard for MLOps, generated automatically by GitHub Pages." />
+<link rel="canonical" href="https://machine-learning-apps.github.io/summary" />
+<meta property="og:url" content="https://machine-learning-apps.github.io/summary" />
+<meta property="og:site_name" content="MLOps Example Dashboard" />
+<script type="application/ld+json">
+{"description":"A Dashboard for MLOps, generated automatically by GitHub Pages.","@type":"WebPage","url":"https://machine-learning-apps.github.io/summary","headline":"Summary","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://machine-learning-apps.github.io/feed.xml" title="MLOps Example Dashboard" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">MLOps Example Dashboard</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/docs/reports/Dashboard/">Dashboard</a><a class="page-link" href="/docs/reports/EDA/">EDA</a><a class="page-link" href="/docs/reports/Model_Eval/">Evaluate Model</a><a class="page-link" href="/docs/reports/cool_stuff/">Test Report</a><a class="page-link" href="/docs/data_dictionary/">Data Dictionary</a><a class="page-link" href="/">Home</a><a class="page-link" href="/docs/reports/">Reports</a><a class="page-link" href="/summary">Summary</a><a class="page-link" href="/docs/model_timeline/">Model Timeline</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<style>
+    a {color: #7253ed}	  
+    a.navigation-list-link {color: #7253ed}
+</style>	
+<center><p class="label label-red" style="opacity: 0.6;">Mockup / Illustrative</p></center>
+<ol id="markdown-toc">
+  <li><a href="#model-details" id="markdown-toc-model-details">Model Details</a></li>
+  <li><a href="#intended-use" id="markdown-toc-intended-use">Intended Use</a></li>
+  <li><a href="#factors" id="markdown-toc-factors">Factors</a></li>
+  <li><a href="#metrics" id="markdown-toc-metrics">Metrics</a></li>
+  <li><a href="#training-data" id="markdown-toc-training-data">Training Data</a></li>
+  <li><a href="#ethical-considerations" id="markdown-toc-ethical-considerations">Ethical Considerations</a></li>
+  <li><a href="#caveats-and-recommendations" id="markdown-toc-caveats-and-recommendations">Caveats and Recommendations</a></li>
+</ol>
+
+<h2 id="model-details">Model Details</h2>
+
+<ul>
+  <li>Developed by researchers at Google and the University of Toronto, 2018, v1.</li>
+  <li>Convolutional Neural Net.</li>
+  <li>Pretrained for face recognition then fine-tuned with cross-entropy loss for binary smiling classification.</li>
+</ul>
+
+<h2 id="intended-use">Intended Use</h2>
+
+<ul>
+  <li>Intended to be used for fun applications, such as creating cartoon smiles on real images; augmentative applications, such as providing details for people who are blind; or assisting applications such as automatically finding smiling photos.</li>
+  <li>Particularly intended for younger audiences.</li>
+  <li>Not suitable for emotion detection or determining affect; smiles were annotated
+based on physical appearance, and not underlying emotions.</li>
+</ul>
+
+<h2 id="factors">Factors</h2>
+
+<ul>
+  <li>Based on known problems with computer vision face technology, potential relevant factors include groups for gender, age, race, and Fitzpatrick skin type; hardware factors of camera type and lens type; and environmental factors oflighting and humidity.</li>
+  <li>Evaluation factors are gender and age group, as annotated in the publicly available
+dataset CelebA [36]. Further possible factors not currently available in a public smiling dataset. Gender and age determined by third-party annotators based
+on visual presentation, following a set of examples of male/female gender and
+young/old age. Further details available in [36].</li>
+</ul>
+
+<h2 id="metrics">Metrics</h2>
+
+<ul>
+  <li>Evaluation metrics include False Positive Rate and False Negative Rate to
+measure disproportionate model performance errors across subgroups. False
+Discovery Rate and False Omission Rate, which measure the fraction of negative (not smiling) and positive (smiling) predictions that are incorrectly predicted
+to be positive and negative, respectively are also reported. [48]</li>
+  <li>Together, these four metrics provide values for different errors that can be calculated from the confusion matrix for binary classification systems.</li>
+  <li>These also correspond to metrics in recent definitions of “fairness” in machine learning (cf. [6, 26]), where parity across subgroups for different metrics correspond to different fairness criteria.</li>
+  <li>95% confidence intervals calculated with bootstrap resampling.</li>
+  <li>All metrics reported at the .5 decision threshold, where all error types (FPR, FNR, FDR, FOR) are within the same range (0.04 - 0.14).</li>
+</ul>
+
+<h2 id="training-data">Training Data</h2>
+
+<ul>
+  <li>CelebA [36], training data split.
+Evaluation Data</li>
+  <li>CelebA [36], test data split.</li>
+  <li>Chosen as a basic proof-of-concept.</li>
+</ul>
+
+<h2 id="ethical-considerations">Ethical Considerations</h2>
+
+<ul>
+  <li>Faces and annotations based on public figures (celebrities). No new information
+is inferred or annotated.</li>
+</ul>
+
+<h2 id="caveats-and-recommendations">Caveats and Recommendations</h2>
+
+<ul>
+  <li>Does not capture race or skin type, which has been reported as a source of disproportionate errors [5].</li>
+  <li>Given gender classes are binary (male/not male), which we include as male/female. Further work needed to evaluate across a spectrum of genders.</li>
+  <li>An ideal evaluation dataset would additionally include annotations for Fitzpatrick skin type, camera details, and environment (lighting/humidity) details.</li>
+  <li>This is an example.</li>
+</ul>
+
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">MLOps Example Dashboard</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">MLOps Example Dashboard</li><li><a class="u-email" href="mailto:support@github.com">support@github.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/jekyll"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">jekyll</span></a></li><li><a href="https://www.twitter.com/jekyllrb"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">jekyllrb</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>A Dashboard for MLOps, generated automatically by GitHub Pages.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
