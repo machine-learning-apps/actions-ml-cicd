@@ -30,7 +30,7 @@ jobs:
       - name: Jekyll build
         uses: docker://jekyll/jekyll
         with:
-          args: jekyll build --source docs/ --destination docs/ --trace
+          args: /bin/bash -c "cd docs; bundle install; bundle exec jekyll build"
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3.0.3
