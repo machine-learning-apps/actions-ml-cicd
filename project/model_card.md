@@ -4,6 +4,7 @@
  - Convolutional Neural Net.
  - Pretrained for face recognition then fine-tuned with cross-entropy loss for binary smiling classification.
  
+
 ## Intended Use
 
  - Intended to be used for fun applications, such as creating cartoon smiles on real images; augmentative applications, such as providing details for people who are blind; or assisting applications such as automatically finding smiling photos.
