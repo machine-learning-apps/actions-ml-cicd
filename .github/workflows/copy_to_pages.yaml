@@ -13,12 +13,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
+        with:
+          persist-credentials: false
 
       - name: Copy Repository Contents
         run: |
           chmod -R 777 docs/docs
           ./action_files/copy_files.sh
-          ./action_files/push_to_repo.sh
 
       - name: setup directories for Jekyll build
         run: |
