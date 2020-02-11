@@ -8,7 +8,6 @@ on:
 
 jobs:
   convert-notebook:
-    if: contains(join(github.event.commits.*.message), '/sync')
     runs-on: ubuntu-latest
     steps:
     - name: Copy Repository Contents
@@ -17,10 +16,6 @@ jobs:
         persist-credentials: false
 
     - uses: fastai/fastpages@master
-      with:
-        BOOL_SAVE_MARKDOWN: true
-        SSH_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-        FORMAT: 'notebook'
 
     - name: setup directories for Jekyll build
       run: |
