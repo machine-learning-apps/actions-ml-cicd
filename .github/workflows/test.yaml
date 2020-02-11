@@ -16,9 +16,11 @@ jobs:
         sudo chmod -R 777 docs
 
     - name: Jekyll build
-      uses: docker://jekyll/jekyll
-      with:
-        args: bundle update && jekyll build --source docs --destination docs
+      run: |
+          docker run  -v /home/runner/work/actions-ml-cicd/actions-ml-cicd/docs:/workspace -w /workspace jekyll/jekyll bundle update && jekyll build --source docs --destination docs
+
+    - name:  See files
+      run: ls docs
 
     # only deploy upon a push to master
     - name: Deploy
@@ -27,4 +29,4 @@ jobs:
       env:
         ACTIONS_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
         PUBLISH_BRANCH: gh-pages
-        PUBLISH_DIR: ./_site
+        PUBLISH_DIR: ./docs/_site
