@@ -29,8 +29,9 @@ jobs:
         sudo chmod -R 777 .
         
     - name: Jekyll build
-      run: |
-          docker run  -v /home/runner/work/actions-ml-cicd/actions-ml-cicd/docs:/workspace -w /workspace jekyll/jekyll jekyll build
+      uses: docker://jekyll/jekyll
+      with:
+        args: /bin/bash -c "cd docs; bundle install; bundle exec jekyll build"
 
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v2
