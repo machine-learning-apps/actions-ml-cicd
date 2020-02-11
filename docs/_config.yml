@@ -18,8 +18,8 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-theme: just-the-docs
-title: MLOps Dashboard
+theme: minima
+title: MLOps Example Dashboard
 email: support@github.com
 
 description: A Dashboard for MLOps, generated automatically by GitHub Pages.
