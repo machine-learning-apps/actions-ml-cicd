@@ -30,9 +30,6 @@ jobs:
         pip install -e nbdev
         cp nbdev/settings.ini .
         python action_files/nb2docs.py
-    
-    - name: commit & push files
-      run: ./action_files/push_notebooks.sh
 
     - name: setup directories for Jekyll build
       run: |
