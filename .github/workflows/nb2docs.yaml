@@ -15,7 +15,21 @@ jobs:
       with:
         persist-credentials: false
 
-    - uses: fastai/fastpages@master
+    - uses: actions/setup-python@v1
+      with:
+        python-version: '3.6'
+        architecture: 'x64'
+    
+    - name: Run notebook converter
+      run: |
+        chmod -R 777 docs/docs/reports
+        pip install --upgrade pip
+        pip install jupyter_client ipykernel
+        python3 -m ipykernel install --user
+        git clone https://github.com/fastai/nbdev.git
+        pip install -e nbdev
+        cp nbdev/settings.ini .
+        python action_files/nb2docs.py
 
     - name: setup directories for Jekyll build
       run: |
