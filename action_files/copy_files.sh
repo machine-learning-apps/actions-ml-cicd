@@ -21,3 +21,5 @@ nav_order: 3
 1. TOC
 {:toc}" > project/temp.md && for f in project/temp.md project/data_dictionary.md; do cat "$f"; echo " "; done > project/output.md && mv project/output.md docs/docs/data_dictionary.md     
 cp project/model_events.csv docs/_data/model_events.csv
+
+rm project/temp.md
